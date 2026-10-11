@@ -41,3 +41,10 @@ example
 # generated native folders
 /ios
 /android
+
+# Additional project exclusions
+native-bundles/
+ios/
+android/
+*.log
+.impeccable/mocks/

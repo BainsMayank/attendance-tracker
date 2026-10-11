@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "expo-glass-effect": {
+      "source": "jchaselubitz/drill-app",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/expo-glass-effect/SKILL.md",
+      "computedHash": "2c36c6483a319e6105fb1ab51f9af92d8743d9e656a185da3d84c23a54afc56c"
+    }
+  }
+}
