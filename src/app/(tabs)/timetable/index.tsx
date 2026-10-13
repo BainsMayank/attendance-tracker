@@ -1,0 +1,1 @@
+export { TimetableScreen as default } from "@/features/timetable/timetable-screen";

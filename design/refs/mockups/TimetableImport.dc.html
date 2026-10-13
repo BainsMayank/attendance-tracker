@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Import timetable from a photo</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+.app{--bg:#F6F7FB;--sf:#FFFFFF;--sr:#ECEEF5;--t1:#171923;--t2:#52586A;--sep:#D9DDE8;--ac:#4144D8;--onac:#FFFFFF;--acs:#EEEEFF;--ok:#176640;--oks:#E8F5ED;--bad:#B42338;--bads:#FDECEF;--warn:#805800;--warns:#FFF4D8;--neu:#535D73;--neus:#EEF0F5;--code:#F0F1F7;position:relative;overflow:hidden;box-sizing:border-box;background:var(--bg);color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+.app.dark{--bg:#101116;--sf:#1B1D26;--sr:#272A36;--t1:#F5F6FC;--t2:#B3B8CB;--sep:#383D4D;--ac:#B2B4FF;--onac:#18194A;--acs:#292B4E;--ok:#7ED6A3;--oks:#173728;--bad:#FF9CA9;--bads:#45222B;--warn:#F1CA72;--warns:#3D321D;--neu:#B6BFD5;--neus:#292F3C;--code:#14151C}
+.app *{box-sizing:border-box}
+.app button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--ac);text-decoration:none}a:hover{color:var(--ac)}
+.cap{font-size:13px;line-height:18px;font-weight:500;color:var(--t2)}
+.ico{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.step{display:flex;gap:14px}
+.num{width:32px;height:32px;border-radius:16px;background:var(--ac);color:var(--onac);font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
+.line{width:2px;flex:1;background:var(--sep);margin:6px auto 0;border-radius:1px}
+.body{flex:1;min-width:0;padding-bottom:22px;display:flex;flex-direction:column;gap:10px}
+.body h2{margin:4px 0 0;font-size:18px;line-height:23px;font-weight:700}
+.body p{margin:0;font-size:15px;line-height:21px;color:var(--t2)}
+.svc{flex:1;height:48px;border-radius:14px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--sep);display:flex;align-items:center;justify-content:center;gap:6px;font-size:15px;font-weight:600;color:var(--t1) !important}
+.btn{height:50px;border-radius:14px;border:0;font-size:17px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn.pri{background:var(--ac);color:var(--onac) !important}
+.btn.done{background:var(--oks);color:var(--ok) !important}
+</style>
+</helmet>
+<div class="app {{themeClass}}" style="width: 390px; height: 1500px">
+  <nav style="padding: 54px 12px 0 4px; height: 102px; display: flex; align-items: center">
+    <a href="Timetable.dc.html" style="display: flex; align-items: center; gap: 2px; height: 44px; padding: 0 8px; font-size: 17px">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>Timetable
+    </a>
+  </nav>
+
+  <main style="padding: 0 20px 40px; display: flex; flex-direction: column; gap: 20px">
+    <div>
+      <h1 style="margin: 0; font-size: 30px; line-height: 36px; font-weight: 700; letter-spacing: -0.3px">Import from a photo</h1>
+      <p style="margin: 8px 0 0; font-size: 16px; line-height: 23px; color: var(--t2)">This app doesn’t run AI itself, so it stays free. A chatbot you already use reads the photo; you paste its answer back here. Takes about two minutes.</p>
+    </div>
+
+    <ol aria-label="Steps" style="list-style: none; margin: 0; padding: 0">
+      <li class="step">
+        <div style="display: flex; flex-direction: column"><span class="num">1</span><span class="line"></span></div>
+        <div class="body">
+          <h2>Get a clear picture</h2>
+          <p>Photograph or screenshot the full week. Keep it flat and well lit, with every day, time and room readable.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div style="display: flex; flex-direction: column"><span class="num">2</span><span class="line"></span></div>
+        <div class="body">
+          <h2>Open a free AI chat</h2>
+          <p>Any of these works on the free plan. Start a new chat.</p>
+          <div style="display: flex; gap: 8px">
+            <a class="svc" href="https://chatgpt.com">ChatGPT<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 14px; height: 14px; color: var(--t2)"><path d="M14 4h6v6M20 4l-9 9M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path></svg></a>
+            <a class="svc" href="https://gemini.google.com">Gemini<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 14px; height: 14px; color: var(--t2)"><path d="M14 4h6v6M20 4l-9 9M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path></svg></a>
+            <a class="svc" href="https://claude.ai">Claude<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 14px; height: 14px; color: var(--t2)"><path d="M14 4h6v6M20 4l-9 9M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path></svg></a>
+          </div>
+        </div>
+      </li>
+      <li class="step">
+        <div style="display: flex; flex-direction: column"><span class="num">3</span><span class="line"></span></div>
+        <div class="body">
+          <h2>Attach the photo and send this prompt</h2>
+          <p>The prompt tells the chatbot exactly which format this app reads.</p>
+          <div style="border-radius: 16px; background: var(--sf); box-shadow: inset 0 0 0 1px var(--sep); overflow: hidden">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 8px 8px 8px 14px; border-bottom: 0.5px solid var(--sep)">
+              <span class="cap" style="font-weight: 600">Import prompt · v1</span>
+              <span class="cap">{{chars}} characters</span>
+            </div>
+            <div tabindex="0" aria-label="Prompt text" style="max-height: 236px; overflow: auto; padding: 12px 14px; background: var(--code); font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; line-height: 18px; white-space: pre-wrap; word-break: break-word; color: var(--t1)">{{prompt}}</div>
+          </div>
+          <button class="{{copyCls}}" onClick="{{copy}}" aria-live="polite">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 20px; height: 20px"><path d="{{copyIcon}}"></path></svg>{{copyLabel}}
+          </button>
+        </div>
+      </li>
+      <li class="step">
+        <div style="display: flex; flex-direction: column"><span class="num">4</span></div>
+        <div class="body" style="padding-bottom: 0">
+          <h2>Copy the reply, paste it here</h2>
+          <p>The reply is a block of text starting with <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 13px; color: var(--t1)">{"formatVersion": 1</span>. If the chatbot asks about a smudged cell, answer it first.</p>
+          <a href="TimetableImportPaste.dc.html" class="btn pri" style="background: var(--t1); color: var(--bg) !important">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 20px; height: 20px"><rect x="7" y="4" width="10" height="4" rx="1"></rect><path d="M7 6H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-1"></path></svg>Paste reply
+          </a>
+        </div>
+      </li>
+    </ol>
+
+    <div style="display: flex; gap: 12px; padding: 14px 16px; border-radius: 16px; background: var(--sf)">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="color: var(--ok); margin-top: 1px"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
+      <div style="font-size: 14px; line-height: 20px; color: var(--t2)"><b style="color: var(--t1)">Your photo never touches this app.</b> It goes only to the chatbot you pick. You review everything before it’s saved.</div>
+    </div>
+
+    <a href="TimetableSlot.dc.html" style="align-self: center; height: 44px; display: flex; align-items: center; font-size: 15px; font-weight: 600">Rather type it in? Add classes manually</a>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["Light","Dark"],"default":"Light"},"$preview":{"width":390,"height":1500}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = { copied: false };
+  }
+  componentWillUnmount() { clearTimeout(this.t); }
+  renderVals() {
+    const prompt = [
+      'Read the attached timetable photo and return exactly one JSON object for Attendance Tracker. Return JSON only, without Markdown fences or explanation. Do not invent unclear subjects, times, venues, teachers, or week patterns; ask me to clarify anything unreadable before returning JSON. Ignore breaks and lunch.',
+      '',
+      'Use this structure:',
+      '{"formatVersion":1,"subjects":[{"name":"Mathematics","code":null,"teacher":null}],"slots":[{"subject":"Mathematics","day":"Monday","start":"09:00","end":"10:00","classType":"Lecture","weekPattern":"every","venue":null,"teacher":null,"countsAs":1}]}',
+      '',
+      'Rules:',
+      '- formatVersion must be the number 1. Include only formatVersion, subjects, and slots at the top level.',
+      '- subjects is a nonempty array (maximum 200). Each subject has a name (1-120 characters), and optional code and teacher (string up to 200 characters or null).',
+      '- slots is a nonempty array (maximum 1000). Each slot has subject, day, start, and end. subject must match a subject name. day is Monday through Sunday. Times are 24-hour HH:mm.',
+      '- Optional slot fields: classType (default Lecture), weekPattern (every, odd, or even), venue, teacher, countsAs (whole number 1-100; default 1).'
+    ].join('\n');
+    const c = this.state.copied;
+    return {
+      themeClass: (this.props.theme ?? 'Light') === 'Dark' ? 'dark' : '',
+      prompt, chars: prompt.length.toLocaleString('en-US'),
+      copyCls: c ? 'btn done' : 'btn pri',
+      copyLabel: c ? 'Copied. Now paste it in the chat' : 'Copy prompt',
+      copyIcon: c ? 'M5 12.5l4.5 4.5L19 7.5' : 'M8 8h12v12H8zM16 8V4H4v12h4',
+      copy: () => {
+        try { navigator.clipboard && navigator.clipboard.writeText(prompt).catch(() => {}); } catch (e) {}
+        clearTimeout(this.t);
+        this.setState({ copied: true });
+        this.t = setTimeout(() => this.setState({ copied: false }), 2500);
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

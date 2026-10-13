@@ -1,0 +1,2747 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "3f1a073f-accf-4fe9-bc7d-c5db9cdadd94",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "attendance_records": {
+      "name": "attendance_records",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "revision": {
+          "name": "revision",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        },
+        "semester_id": {
+          "name": "semester_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "subject_id": {
+          "name": "subject_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "on_date": {
+          "name": "on_date",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "kind": {
+          "name": "kind",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "occurrence_key": {
+          "name": "occurrence_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "slot_id": {
+          "name": "slot_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "extra_class_id": {
+          "name": "extra_class_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "class_type_id": {
+          "name": "class_type_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "class_type_name": {
+          "name": "class_type_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "start_minute": {
+          "name": "start_minute",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "end_minute": {
+          "name": "end_minute",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "room": {
+          "name": "room",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "counts_as": {
+          "name": "counts_as",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "status": {
+          "name": "status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "attended_delta": {
+          "name": "attended_delta",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "held_delta": {
+          "name": "held_delta",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "reason": {
+          "name": "reason",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "source": {
+          "name": "source",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'manual'"
+        }
+      },
+      "indexes": {
+        "attendance_occurrence_uq": {
+          "name": "attendance_occurrence_uq",
+          "columns": [
+            "occurrence_key"
+          ],
+          "isUnique": true
+        },
+        "attendance_subject_date_idx": {
+          "name": "attendance_subject_date_idx",
+          "columns": [
+            "subject_id",
+            "on_date",
+            "created_at",
+            "id"
+          ],
+          "isUnique": false
+        },
+        "attendance_sem_day_idx": {
+          "name": "attendance_sem_day_idx",
+          "columns": [
+            "semester_id",
+            "on_date"
+          ],
+          "isUnique": false
+        },
+        "attendance_slot_idx": {
+          "name": "attendance_slot_idx",
+          "columns": [
+            "slot_id"
+          ],
+          "isUnique": false
+        },
+        "attendance_extra_idx": {
+          "name": "attendance_extra_idx",
+          "columns": [
+            "extra_class_id"
+          ],
+          "isUnique": false
+        },
+        "attendance_type_idx": {
+          "name": "attendance_type_idx",
+          "columns": [
+            "class_type_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "attendance_records_semester_id_semesters_id_fk": {
+          "name": "attendance_records_semester_id_semesters_id_fk",
+          "tableFrom": "attendance_records",
+          "tableTo": "semesters",
+          "columnsFrom": [
+            "semester_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "attendance_records_subject_id_semester_id_subjects_id_semester_id_fk": {
+          "name": "attendance_records_subject_id_semester_id_subjects_id_semester_id_fk",
+          "tableFrom": "attendance_records",
+          "tableTo": "subjects",
+          "columnsFrom": [
+            "subject_id",
+            "semester_id"
+          ],
+          "columnsTo": [
+            "id",
+            "semester_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "attendance_records_slot_id_subject_id_semester_id_timetable_slots_id_subject_id_semester_id_fk": {
+          "name": "attendance_records_slot_id_subject_id_semester_id_timetable_slots_id_subject_id_semester_id_fk",
+          "tableFrom": "attendance_records",
+          "tableTo": "timetable_slots",
+          "columnsFrom": [
+            "slot_id",
+            "subject_id",
+            "semester_id"
+          ],
+          "columnsTo": [
+            "id",
+            "subject_id",
+            "semester_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "attendance_records_extra_class_id_subject_id_semester_id_extra_classes_id_subject_id_semester_id_fk": {
+          "name": "attendance_records_extra_class_id_subject_id_semester_id_extra_classes_id_subject_id_semester_id_fk",
+          "tableFrom": "attendance_records",
+          "tableTo": "extra_classes",
+          "columnsFrom": [
+            "extra_class_id",
+            "subject_id",
+            "semester_id"
+          ],
+          "columnsTo": [
+            "id",
+            "subject_id",
+            "semester_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "attendance_records_class_type_id_semester_id_class_types_id_semester_id_fk": {
+          "name": "attendance_records_class_type_id_semester_id_class_types_id_semester_id_fk",
+          "tableFrom": "attendance_records",
+          "tableTo": "class_types",
+          "columnsFrom": [
+            "class_type_id",
+            "semester_id"
+          ],
+          "columnsTo": [
+            "id",
+            "semester_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "attendance_source_ck": {
+          "name": "attendance_source_ck",
+          "value": "\"attendance_records\".\"source\" IN ('manual','import')"
+        },
+        "attendance_shape_ck": {
+          "name": "attendance_shape_ck",
+          "value": "(\n    \"attendance_records\".\"kind\" = 'occurrence' AND \"attendance_records\".\"occurrence_key\" IS NOT NULL\n    AND ((\"attendance_records\".\"slot_id\" IS NOT NULL AND \"attendance_records\".\"extra_class_id\" IS NULL)\n      OR (\"attendance_records\".\"slot_id\" IS NULL AND \"attendance_records\".\"extra_class_id\" IS NOT NULL))\n    AND \"attendance_records\".\"class_type_id\" IS NOT NULL AND \"attendance_records\".\"class_type_name\" IS NOT NULL\n    AND \"attendance_records\".\"start_minute\" IS NOT NULL AND \"attendance_records\".\"end_minute\" IS NOT NULL\n    AND \"attendance_records\".\"start_minute\" >= 0 AND \"attendance_records\".\"start_minute\" < \"attendance_records\".\"end_minute\" AND \"attendance_records\".\"end_minute\" <= 1440\n    AND \"attendance_records\".\"counts_as\" IS NOT NULL AND \"attendance_records\".\"counts_as\" > 0\n    AND \"attendance_records\".\"status\" IS NOT NULL AND (\n      (\"attendance_records\".\"status\" = 'present' AND \"attendance_records\".\"attended_delta\" = \"attendance_records\".\"counts_as\" AND \"attendance_records\".\"held_delta\" = \"attendance_records\".\"counts_as\") OR\n      (\"attendance_records\".\"status\" = 'absent' AND \"attendance_records\".\"attended_delta\" = 0 AND \"attendance_records\".\"held_delta\" = \"attendance_records\".\"counts_as\") OR\n      (\"attendance_records\".\"status\" = 'neutral' AND \"attendance_records\".\"attended_delta\" = 0 AND \"attendance_records\".\"held_delta\" = 0)\n    )\n  ) OR (\n    \"attendance_records\".\"kind\" = 'adjustment' AND \"attendance_records\".\"occurrence_key\" IS NULL\n    AND \"attendance_records\".\"slot_id\" IS NULL AND \"attendance_records\".\"extra_class_id\" IS NULL AND \"attendance_records\".\"class_type_id\" IS NULL\n    AND \"attendance_records\".\"class_type_name\" IS NULL AND \"attendance_records\".\"start_minute\" IS NULL AND \"attendance_records\".\"end_minute\" IS NULL\n    AND \"attendance_records\".\"room\" IS NULL AND \"attendance_records\".\"counts_as\" IS NULL AND \"attendance_records\".\"status\" IS NULL\n    AND \"attendance_records\".\"reason\" IS NOT NULL AND length(trim(\"attendance_records\".\"reason\")) > 0\n    AND (\"attendance_records\".\"attended_delta\" != 0 OR \"attendance_records\".\"held_delta\" != 0)\n  )"
+        }
+      }
+    },
+    "class_types": {
+      "name": "class_types",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "revision": {
+          "name": "revision",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        },
+        "semester_id": {
+          "name": "semester_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "normalized_name": {
+          "name": "normalized_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "default_counts_as": {
+          "name": "default_counts_as",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        },
+        "archived_at": {
+          "name": "archived_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "types_sem_name_uq": {
+          "name": "types_sem_name_uq",
+          "columns": [
+            "semester_id",
+            "normalized_name"
+          ],
+          "isUnique": true
+        },
+        "types_id_sem_uq": {
+          "name": "types_id_sem_uq",
+          "columns": [
+            "id",
+            "semester_id"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "class_types_semester_id_semesters_id_fk": {
+          "name": "class_types_semester_id_semesters_id_fk",
+          "tableFrom": "class_types",
+          "tableTo": "semesters",
+          "columnsFrom": [
+            "semester_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "types_weight_ck": {
+          "name": "types_weight_ck",
+          "value": "\"class_types\".\"default_counts_as\" > 0"
+        }
+      }
+    },
+    "deadlines": {
+      "name": "deadlines",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "revision": {
+          "name": "revision",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        },
+        "subject_id": {
+          "name": "subject_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "category": {
+          "name": "category",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'assignment'"
+        },
+        "due_at": {
+          "name": "due_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "completed_at": {
+          "name": "completed_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "reminder_minutes": {
+          "name": "reminder_minutes",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "notification_id": {
+          "name": "notification_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "deadlines_subject_due_idx": {
+          "name": "deadlines_subject_due_idx",
+          "columns": [
+            "subject_id",
+            "due_at"
+          ],
+          "isUnique": false
+        },
+        "deadlines_due_open_idx": {
+          "name": "deadlines_due_open_idx",
+          "columns": [
+            "completed_at",
+            "due_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "deadlines_subject_id_subjects_id_fk": {
+          "name": "deadlines_subject_id_subjects_id_fk",
+          "tableFrom": "deadlines",
+          "tableTo": "subjects",
+          "columnsFrom": [
+            "subject_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "deadlines_type_ck": {
+          "name": "deadlines_type_ck",
+          "value": "\"deadlines\".\"category\" IN ('assignment','exam','other')"
+        },
+        "deadlines_reminder_ck": {
+          "name": "deadlines_reminder_ck",
+          "value": "\"deadlines\".\"reminder_minutes\" IS NULL OR \"deadlines\".\"reminder_minutes\" >= 0"
+        }
+      }
+    },
+    "extra_classes": {
+      "name": "extra_classes",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "revision": {
+          "name": "revision",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        },
+        "semester_id": {
+          "name": "semester_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "subject_id": {
+          "name": "subject_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "class_type_id": {
+          "name": "class_type_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "on_date": {
+          "name": "on_date",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "start_minute": {
+          "name": "start_minute",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "end_minute": {
+          "name": "end_minute",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "room": {
+          "name": "room",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "counts_as": {
+          "name": "counts_as",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        },
+        "allow_on_holiday": {
+          "name": "allow_on_holiday",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": false
+        },
+        "cancelled_at": {
+          "name": "cancelled_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "extras_id_subject_sem_uq": {
+          "name": "extras_id_subject_sem_uq",
+          "columns": [
+            "id",
+            "subject_id",
+            "semester_id"
+          ],
+          "isUnique": true
+        },
+        "extras_day_idx": {
+          "name": "extras_day_idx",
+          "columns": [
+            "semester_id",
+            "on_date",
+            "start_minute"
+          ],
+          "isUnique": false
+        },
+        "extras_subject_idx": {
+          "name": "extras_subject_idx",
+          "columns": [
+            "subject_id",
+            "on_date"
+          ],
+          "isUnique": false
+        },
+        "extras_type_idx": {
+          "name": "extras_type_idx",
+          "columns": [
+            "class_type_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "extra_classes_semester_id_semesters_id_fk": {
+          "name": "extra_classes_semester_id_semesters_id_fk",
+          "tableFrom": "extra_classes",
+          "tableTo": "semesters",
+          "columnsFrom": [
+            "semester_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "extra_classes_subject_id_semester_id_subjects_id_semester_id_fk": {
+          "name": "extra_classes_subject_id_semester_id_subjects_id_semester_id_fk",
+          "tableFrom": "extra_classes",
+          "tableTo": "subjects",
+          "columnsFrom": [
+            "subject_id",
+            "semester_id"
+          ],
+          "columnsTo": [
+            "id",
+            "semester_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "extra_classes_class_type_id_semester_id_class_types_id_semester_id_fk": {
+          "name": "extra_classes_class_type_id_semester_id_class_types_id_semester_id_fk",
+          "tableFrom": "extra_classes",
+          "tableTo": "class_types",
+          "columnsFrom": [
+            "class_type_id",
+            "semester_id"
+          ],
+          "columnsTo": [
+            "id",
+            "semester_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "extras_time_ck": {
+          "name": "extras_time_ck",
+          "value": "\"extra_classes\".\"start_minute\" >= 0 AND \"extra_classes\".\"start_minute\" < \"extra_classes\".\"end_minute\" AND \"extra_classes\".\"end_minute\" <= 1440"
+        },
+        "extras_weight_ck": {
+          "name": "extras_weight_ck",
+          "value": "\"extra_classes\".\"counts_as\" > 0"
+        },
+        "extras_override_ck": {
+          "name": "extras_override_ck",
+          "value": "\"extra_classes\".\"allow_on_holiday\" IN (0,1)"
+        }
+      }
+    },
+    "files": {
+      "name": "files",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "revision": {
+          "name": "revision",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        },
+        "semester_id": {
+          "name": "semester_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "subject_id": {
+          "name": "subject_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "folder_id": {
+          "name": "folder_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "mime_type": {
+          "name": "mime_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "size_bytes": {
+          "name": "size_bytes",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "sha256": {
+          "name": "sha256",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "relative_path": {
+          "name": "relative_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "source_name": {
+          "name": "source_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "state": {
+          "name": "state",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'staged'"
+        }
+      },
+      "indexes": {
+        "files_path_uq": {
+          "name": "files_path_uq",
+          "columns": [
+            "relative_path"
+          ],
+          "isUnique": true
+        },
+        "files_folder_idx": {
+          "name": "files_folder_idx",
+          "columns": [
+            "folder_id",
+            "name"
+          ],
+          "isUnique": false
+        },
+        "files_scope_idx": {
+          "name": "files_scope_idx",
+          "columns": [
+            "semester_id",
+            "subject_id",
+            "updated_at"
+          ],
+          "isUnique": false
+        },
+        "files_hash_idx": {
+          "name": "files_hash_idx",
+          "columns": [
+            "sha256"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "files_semester_id_semesters_id_fk": {
+          "name": "files_semester_id_semesters_id_fk",
+          "tableFrom": "files",
+          "tableTo": "semesters",
+          "columnsFrom": [
+            "semester_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "files_subject_id_semester_id_subjects_id_semester_id_fk": {
+          "name": "files_subject_id_semester_id_subjects_id_semester_id_fk",
+          "tableFrom": "files",
+          "tableTo": "subjects",
+          "columnsFrom": [
+            "subject_id",
+            "semester_id"
+          ],
+          "columnsTo": [
+            "id",
+            "semester_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "files_folder_id_semester_id_folders_id_semester_id_fk": {
+          "name": "files_folder_id_semester_id_folders_id_semester_id_fk",
+          "tableFrom": "files",
+          "tableTo": "folders",
+          "columnsFrom": [
+            "folder_id",
+            "semester_id"
+          ],
+          "columnsTo": [
+            "id",
+            "semester_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "files_size_ck": {
+          "name": "files_size_ck",
+          "value": "\"files\".\"size_bytes\" >= 0"
+        },
+        "files_state_ck": {
+          "name": "files_state_ck",
+          "value": "\"files\".\"state\" IN ('staged','ready','missing','error')"
+        }
+      }
+    },
+    "folders": {
+      "name": "folders",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "revision": {
+          "name": "revision",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        },
+        "semester_id": {
+          "name": "semester_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "subject_id": {
+          "name": "subject_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "parent_id": {
+          "name": "parent_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "normalized_name": {
+          "name": "normalized_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "folders_id_sem_uq": {
+          "name": "folders_id_sem_uq",
+          "columns": [
+            "id",
+            "semester_id"
+          ],
+          "isUnique": true
+        },
+        "folders_sibling_uq": {
+          "name": "folders_sibling_uq",
+          "columns": [
+            "semester_id",
+            "coalesce(\"subject_id\", '')",
+            "coalesce(\"parent_id\", '')",
+            "normalized_name"
+          ],
+          "isUnique": true
+        },
+        "folders_parent_idx": {
+          "name": "folders_parent_idx",
+          "columns": [
+            "parent_id"
+          ],
+          "isUnique": false
+        },
+        "folders_subject_idx": {
+          "name": "folders_subject_idx",
+          "columns": [
+            "subject_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "folders_semester_id_semesters_id_fk": {
+          "name": "folders_semester_id_semesters_id_fk",
+          "tableFrom": "folders",
+          "tableTo": "semesters",
+          "columnsFrom": [
+            "semester_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "folders_parent_id_folders_id_fk": {
+          "name": "folders_parent_id_folders_id_fk",
+          "tableFrom": "folders",
+          "tableTo": "folders",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "folders_subject_id_semester_id_subjects_id_semester_id_fk": {
+          "name": "folders_subject_id_semester_id_subjects_id_semester_id_fk",
+          "tableFrom": "folders",
+          "tableTo": "subjects",
+          "columnsFrom": [
+            "subject_id",
+            "semester_id"
+          ],
+          "columnsTo": [
+            "id",
+            "semester_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "folders_self_ck": {
+          "name": "folders_self_ck",
+          "value": "\"folders\".\"parent_id\" IS NULL OR \"folders\".\"parent_id\" != \"folders\".\"id\""
+        }
+      }
+    },
+    "holidays": {
+      "name": "holidays",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "revision": {
+          "name": "revision",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        },
+        "semester_id": {
+          "name": "semester_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "subject_id": {
+          "name": "subject_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "starts_on": {
+          "name": "starts_on",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "ends_on": {
+          "name": "ends_on",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "holidays_range_idx": {
+          "name": "holidays_range_idx",
+          "columns": [
+            "semester_id",
+            "starts_on",
+            "ends_on"
+          ],
+          "isUnique": false
+        },
+        "holidays_subject_idx": {
+          "name": "holidays_subject_idx",
+          "columns": [
+            "subject_id",
+            "starts_on"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "holidays_semester_id_semesters_id_fk": {
+          "name": "holidays_semester_id_semesters_id_fk",
+          "tableFrom": "holidays",
+          "tableTo": "semesters",
+          "columnsFrom": [
+            "semester_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "holidays_subject_id_semester_id_subjects_id_semester_id_fk": {
+          "name": "holidays_subject_id_semester_id_subjects_id_semester_id_fk",
+          "tableFrom": "holidays",
+          "tableTo": "subjects",
+          "columnsFrom": [
+            "subject_id",
+            "semester_id"
+          ],
+          "columnsTo": [
+            "id",
+            "semester_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "holidays_dates_ck": {
+          "name": "holidays_dates_ck",
+          "value": "\"holidays\".\"starts_on\" <= \"holidays\".\"ends_on\""
+        }
+      }
+    },
+    "links": {
+      "name": "links",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "revision": {
+          "name": "revision",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        },
+        "subject_id": {
+          "name": "subject_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "url": {
+          "name": "url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "label": {
+          "name": "label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "sort_order": {
+          "name": "sort_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "links_subject_order_idx": {
+          "name": "links_subject_order_idx",
+          "columns": [
+            "subject_id",
+            "sort_order"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "links_subject_id_subjects_id_fk": {
+          "name": "links_subject_id_subjects_id_fk",
+          "tableFrom": "links",
+          "tableTo": "subjects",
+          "columnsFrom": [
+            "subject_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "marks": {
+      "name": "marks",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "revision": {
+          "name": "revision",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        },
+        "subject_id": {
+          "name": "subject_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "on_date": {
+          "name": "on_date",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "earned": {
+          "name": "earned",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "maximum": {
+          "name": "maximum",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "weight_bps": {
+          "name": "weight_bps",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "note": {
+          "name": "note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "marks_subject_date_idx": {
+          "name": "marks_subject_date_idx",
+          "columns": [
+            "subject_id",
+            "on_date"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "marks_subject_id_subjects_id_fk": {
+          "name": "marks_subject_id_subjects_id_fk",
+          "tableFrom": "marks",
+          "tableTo": "subjects",
+          "columnsFrom": [
+            "subject_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "marks_max_ck": {
+          "name": "marks_max_ck",
+          "value": "\"marks\".\"maximum\" > 0"
+        },
+        "marks_earned_ck": {
+          "name": "marks_earned_ck",
+          "value": "\"marks\".\"earned\" IS NULL OR (\"marks\".\"earned\" >= 0 AND \"marks\".\"earned\" <= \"marks\".\"maximum\")"
+        },
+        "marks_weight_ck": {
+          "name": "marks_weight_ck",
+          "value": "\"marks\".\"weight_bps\" IS NULL OR \"marks\".\"weight_bps\" BETWEEN 0 AND 10000"
+        }
+      }
+    },
+    "notes": {
+      "name": "notes",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "revision": {
+          "name": "revision",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        },
+        "subject_id": {
+          "name": "subject_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "unit_id": {
+          "name": "unit_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "topic_id": {
+          "name": "topic_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "body": {
+          "name": "body",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "''"
+        },
+        "pinned": {
+          "name": "pinned",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": false
+        }
+      },
+      "indexes": {
+        "notes_subject_idx": {
+          "name": "notes_subject_idx",
+          "columns": [
+            "subject_id",
+            "pinned",
+            "updated_at"
+          ],
+          "isUnique": false
+        },
+        "notes_unit_idx": {
+          "name": "notes_unit_idx",
+          "columns": [
+            "unit_id"
+          ],
+          "isUnique": false
+        },
+        "notes_topic_idx": {
+          "name": "notes_topic_idx",
+          "columns": [
+            "topic_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "notes_subject_id_subjects_id_fk": {
+          "name": "notes_subject_id_subjects_id_fk",
+          "tableFrom": "notes",
+          "tableTo": "subjects",
+          "columnsFrom": [
+            "subject_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "notes_unit_id_subject_id_units_id_subject_id_fk": {
+          "name": "notes_unit_id_subject_id_units_id_subject_id_fk",
+          "tableFrom": "notes",
+          "tableTo": "units",
+          "columnsFrom": [
+            "unit_id",
+            "subject_id"
+          ],
+          "columnsTo": [
+            "id",
+            "subject_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "notes_topic_id_subject_id_topics_id_subject_id_fk": {
+          "name": "notes_topic_id_subject_id_topics_id_subject_id_fk",
+          "tableFrom": "notes",
+          "tableTo": "topics",
+          "columnsFrom": [
+            "topic_id",
+            "subject_id"
+          ],
+          "columnsTo": [
+            "id",
+            "subject_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "notes_pin_ck": {
+          "name": "notes_pin_ck",
+          "value": "\"notes\".\"pinned\" IN (0,1)"
+        }
+      }
+    },
+    "semesters": {
+      "name": "semesters",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "revision": {
+          "name": "revision",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "starts_on": {
+          "name": "starts_on",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "ends_on": {
+          "name": "ends_on",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "timezone": {
+          "name": "timezone",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'Asia/Kolkata'"
+        },
+        "week_anchor": {
+          "name": "week_anchor",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "target_bps": {
+          "name": "target_bps",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 7500
+        },
+        "archived_at": {
+          "name": "archived_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "semesters_dates_idx": {
+          "name": "semesters_dates_idx",
+          "columns": [
+            "starts_on",
+            "ends_on"
+          ],
+          "isUnique": false
+        },
+        "semesters_archive_idx": {
+          "name": "semesters_archive_idx",
+          "columns": [
+            "archived_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "semester_dates_ck": {
+          "name": "semester_dates_ck",
+          "value": "\"semesters\".\"starts_on\" <= \"semesters\".\"ends_on\""
+        },
+        "semester_target_ck": {
+          "name": "semester_target_ck",
+          "value": "\"semesters\".\"target_bps\" BETWEEN 0 AND 10000"
+        }
+      }
+    },
+    "settings": {
+      "name": "settings",
+      "columns": {
+        "key": {
+          "name": "key",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "value": {
+          "name": "value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "revision": {
+          "name": "revision",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "study_sessions": {
+      "name": "study_sessions",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "revision": {
+          "name": "revision",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        },
+        "semester_id": {
+          "name": "semester_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "subject_id": {
+          "name": "subject_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "topic_id": {
+          "name": "topic_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "started_at": {
+          "name": "started_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "ended_at": {
+          "name": "ended_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "state": {
+          "name": "state",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "planned_focus_seconds": {
+          "name": "planned_focus_seconds",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "planned_break_seconds": {
+          "name": "planned_break_seconds",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 300
+        },
+        "active_seconds": {
+          "name": "active_seconds",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
+        },
+        "phase": {
+          "name": "phase",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'focus'"
+        },
+        "phase_started_at": {
+          "name": "phase_started_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "checkpoint_at": {
+          "name": "checkpoint_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "note": {
+          "name": "note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "study_sem_start_idx": {
+          "name": "study_sem_start_idx",
+          "columns": [
+            "semester_id",
+            "started_at"
+          ],
+          "isUnique": false
+        },
+        "study_subject_idx": {
+          "name": "study_subject_idx",
+          "columns": [
+            "subject_id",
+            "started_at"
+          ],
+          "isUnique": false
+        },
+        "study_topic_idx": {
+          "name": "study_topic_idx",
+          "columns": [
+            "topic_id"
+          ],
+          "isUnique": false
+        },
+        "study_one_active_uq": {
+          "name": "study_one_active_uq",
+          "columns": [
+            "1"
+          ],
+          "isUnique": true,
+          "where": "\"study_sessions\".\"state\" IN ('running','paused')"
+        }
+      },
+      "foreignKeys": {
+        "study_sessions_semester_id_semesters_id_fk": {
+          "name": "study_sessions_semester_id_semesters_id_fk",
+          "tableFrom": "study_sessions",
+          "tableTo": "semesters",
+          "columnsFrom": [
+            "semester_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "study_sessions_subject_id_semester_id_subjects_id_semester_id_fk": {
+          "name": "study_sessions_subject_id_semester_id_subjects_id_semester_id_fk",
+          "tableFrom": "study_sessions",
+          "tableTo": "subjects",
+          "columnsFrom": [
+            "subject_id",
+            "semester_id"
+          ],
+          "columnsTo": [
+            "id",
+            "semester_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "study_sessions_topic_id_subject_id_topics_id_subject_id_fk": {
+          "name": "study_sessions_topic_id_subject_id_topics_id_subject_id_fk",
+          "tableFrom": "study_sessions",
+          "tableTo": "topics",
+          "columnsFrom": [
+            "topic_id",
+            "subject_id"
+          ],
+          "columnsTo": [
+            "id",
+            "subject_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "study_state_ck": {
+          "name": "study_state_ck",
+          "value": "\"study_sessions\".\"state\" IN ('running','paused','completed','discarded')"
+        },
+        "study_phase_ck": {
+          "name": "study_phase_ck",
+          "value": "\"study_sessions\".\"phase\" IN ('focus','break')"
+        },
+        "study_topic_scope_ck": {
+          "name": "study_topic_scope_ck",
+          "value": "\"study_sessions\".\"topic_id\" IS NULL OR \"study_sessions\".\"subject_id\" IS NOT NULL"
+        },
+        "study_seconds_ck": {
+          "name": "study_seconds_ck",
+          "value": "\"study_sessions\".\"planned_focus_seconds\" > 0 AND \"study_sessions\".\"planned_break_seconds\" >= 0 AND \"study_sessions\".\"active_seconds\" >= 0"
+        },
+        "study_end_ck": {
+          "name": "study_end_ck",
+          "value": "(\"study_sessions\".\"state\" IN ('running','paused') AND \"study_sessions\".\"ended_at\" IS NULL)\n    OR (\"study_sessions\".\"state\" IN ('completed','discarded') AND \"study_sessions\".\"ended_at\" IS NOT NULL AND \"study_sessions\".\"ended_at\" >= \"study_sessions\".\"started_at\")"
+        }
+      }
+    },
+    "subjects": {
+      "name": "subjects",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "revision": {
+          "name": "revision",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        },
+        "semester_id": {
+          "name": "semester_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "normalized_name": {
+          "name": "normalized_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "code": {
+          "name": "code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "teacher": {
+          "name": "teacher",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "icon": {
+          "name": "icon",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "credits": {
+          "name": "credits",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "target_bps": {
+          "name": "target_bps",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "sort_order": {
+          "name": "sort_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
+        },
+        "archived_at": {
+          "name": "archived_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "subjects_sem_name_uq": {
+          "name": "subjects_sem_name_uq",
+          "columns": [
+            "semester_id",
+            "normalized_name"
+          ],
+          "isUnique": true
+        },
+        "subjects_id_sem_uq": {
+          "name": "subjects_id_sem_uq",
+          "columns": [
+            "id",
+            "semester_id"
+          ],
+          "isUnique": true
+        },
+        "subjects_sem_order_idx": {
+          "name": "subjects_sem_order_idx",
+          "columns": [
+            "semester_id",
+            "archived_at",
+            "sort_order"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "subjects_semester_id_semesters_id_fk": {
+          "name": "subjects_semester_id_semesters_id_fk",
+          "tableFrom": "subjects",
+          "tableTo": "semesters",
+          "columnsFrom": [
+            "semester_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "subject_target_ck": {
+          "name": "subject_target_ck",
+          "value": "\"subjects\".\"target_bps\" IS NULL OR \"subjects\".\"target_bps\" BETWEEN 0 AND 10000"
+        },
+        "subject_credits_ck": {
+          "name": "subject_credits_ck",
+          "value": "\"subjects\".\"credits\" IS NULL OR \"subjects\".\"credits\" >= 0"
+        }
+      }
+    },
+    "timetable_slots": {
+      "name": "timetable_slots",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "revision": {
+          "name": "revision",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        },
+        "semester_id": {
+          "name": "semester_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "version_id": {
+          "name": "version_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "subject_id": {
+          "name": "subject_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "class_type_id": {
+          "name": "class_type_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "weekday": {
+          "name": "weekday",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "parity": {
+          "name": "parity",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'all'"
+        },
+        "start_minute": {
+          "name": "start_minute",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "end_minute": {
+          "name": "end_minute",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "room": {
+          "name": "room",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "counts_as": {
+          "name": "counts_as",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        }
+      },
+      "indexes": {
+        "slots_id_subject_sem_uq": {
+          "name": "slots_id_subject_sem_uq",
+          "columns": [
+            "id",
+            "subject_id",
+            "semester_id"
+          ],
+          "isUnique": true
+        },
+        "slots_exact_uq": {
+          "name": "slots_exact_uq",
+          "columns": [
+            "version_id",
+            "subject_id",
+            "class_type_id",
+            "weekday",
+            "parity",
+            "start_minute",
+            "end_minute"
+          ],
+          "isUnique": true
+        },
+        "slots_week_idx": {
+          "name": "slots_week_idx",
+          "columns": [
+            "version_id",
+            "weekday",
+            "start_minute"
+          ],
+          "isUnique": false
+        },
+        "slots_subject_idx": {
+          "name": "slots_subject_idx",
+          "columns": [
+            "subject_id"
+          ],
+          "isUnique": false
+        },
+        "slots_type_idx": {
+          "name": "slots_type_idx",
+          "columns": [
+            "class_type_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "timetable_slots_semester_id_semesters_id_fk": {
+          "name": "timetable_slots_semester_id_semesters_id_fk",
+          "tableFrom": "timetable_slots",
+          "tableTo": "semesters",
+          "columnsFrom": [
+            "semester_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "timetable_slots_version_id_semester_id_timetable_versions_id_semester_id_fk": {
+          "name": "timetable_slots_version_id_semester_id_timetable_versions_id_semester_id_fk",
+          "tableFrom": "timetable_slots",
+          "tableTo": "timetable_versions",
+          "columnsFrom": [
+            "version_id",
+            "semester_id"
+          ],
+          "columnsTo": [
+            "id",
+            "semester_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "timetable_slots_subject_id_semester_id_subjects_id_semester_id_fk": {
+          "name": "timetable_slots_subject_id_semester_id_subjects_id_semester_id_fk",
+          "tableFrom": "timetable_slots",
+          "tableTo": "subjects",
+          "columnsFrom": [
+            "subject_id",
+            "semester_id"
+          ],
+          "columnsTo": [
+            "id",
+            "semester_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "timetable_slots_class_type_id_semester_id_class_types_id_semester_id_fk": {
+          "name": "timetable_slots_class_type_id_semester_id_class_types_id_semester_id_fk",
+          "tableFrom": "timetable_slots",
+          "tableTo": "class_types",
+          "columnsFrom": [
+            "class_type_id",
+            "semester_id"
+          ],
+          "columnsTo": [
+            "id",
+            "semester_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "slots_day_ck": {
+          "name": "slots_day_ck",
+          "value": "\"timetable_slots\".\"weekday\" BETWEEN 1 AND 7"
+        },
+        "slots_parity_ck": {
+          "name": "slots_parity_ck",
+          "value": "\"timetable_slots\".\"parity\" IN ('all','odd','even')"
+        },
+        "slots_time_ck": {
+          "name": "slots_time_ck",
+          "value": "\"timetable_slots\".\"start_minute\" >= 0 AND \"timetable_slots\".\"start_minute\" < \"timetable_slots\".\"end_minute\" AND \"timetable_slots\".\"end_minute\" <= 1440"
+        },
+        "slots_weight_ck": {
+          "name": "slots_weight_ck",
+          "value": "\"timetable_slots\".\"counts_as\" > 0"
+        }
+      }
+    },
+    "timetable_versions": {
+      "name": "timetable_versions",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "revision": {
+          "name": "revision",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        },
+        "semester_id": {
+          "name": "semester_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "label": {
+          "name": "label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "effective_from": {
+          "name": "effective_from",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "effective_until": {
+          "name": "effective_until",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "versions_sem_start_uq": {
+          "name": "versions_sem_start_uq",
+          "columns": [
+            "semester_id",
+            "effective_from"
+          ],
+          "isUnique": true
+        },
+        "versions_id_sem_uq": {
+          "name": "versions_id_sem_uq",
+          "columns": [
+            "id",
+            "semester_id"
+          ],
+          "isUnique": true
+        },
+        "versions_lookup_idx": {
+          "name": "versions_lookup_idx",
+          "columns": [
+            "semester_id",
+            "effective_from",
+            "effective_until"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "timetable_versions_semester_id_semesters_id_fk": {
+          "name": "timetable_versions_semester_id_semesters_id_fk",
+          "tableFrom": "timetable_versions",
+          "tableTo": "semesters",
+          "columnsFrom": [
+            "semester_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "versions_range_ck": {
+          "name": "versions_range_ck",
+          "value": "\"timetable_versions\".\"effective_until\" IS NULL OR \"timetable_versions\".\"effective_until\" > \"timetable_versions\".\"effective_from\""
+        }
+      }
+    },
+    "topics": {
+      "name": "topics",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "revision": {
+          "name": "revision",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        },
+        "subject_id": {
+          "name": "subject_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "unit_id": {
+          "name": "unit_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "sort_order": {
+          "name": "sort_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
+        },
+        "completed_at": {
+          "name": "completed_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "topics_id_subject_uq": {
+          "name": "topics_id_subject_uq",
+          "columns": [
+            "id",
+            "subject_id"
+          ],
+          "isUnique": true
+        },
+        "topics_unit_order_idx": {
+          "name": "topics_unit_order_idx",
+          "columns": [
+            "unit_id",
+            "sort_order"
+          ],
+          "isUnique": false
+        },
+        "topics_subject_done_idx": {
+          "name": "topics_subject_done_idx",
+          "columns": [
+            "subject_id",
+            "completed_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "topics_subject_id_subjects_id_fk": {
+          "name": "topics_subject_id_subjects_id_fk",
+          "tableFrom": "topics",
+          "tableTo": "subjects",
+          "columnsFrom": [
+            "subject_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "topics_unit_id_subject_id_units_id_subject_id_fk": {
+          "name": "topics_unit_id_subject_id_units_id_subject_id_fk",
+          "tableFrom": "topics",
+          "tableTo": "units",
+          "columnsFrom": [
+            "unit_id",
+            "subject_id"
+          ],
+          "columnsTo": [
+            "id",
+            "subject_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "units": {
+      "name": "units",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "revision": {
+          "name": "revision",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
+        },
+        "subject_id": {
+          "name": "subject_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "sort_order": {
+          "name": "sort_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "units_id_subject_uq": {
+          "name": "units_id_subject_uq",
+          "columns": [
+            "id",
+            "subject_id"
+          ],
+          "isUnique": true
+        },
+        "units_subject_order_idx": {
+          "name": "units_subject_order_idx",
+          "columns": [
+            "subject_id",
+            "sort_order"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "units_subject_id_subjects_id_fk": {
+          "name": "units_subject_id_subjects_id_fk",
+          "tableFrom": "units",
+          "tableTo": "subjects",
+          "columnsFrom": [
+            "subject_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {
+      "folders_sibling_uq": {
+        "columns": {
+          "coalesce(\"subject_id\", '')": {
+            "isExpression": true
+          },
+          "coalesce(\"parent_id\", '')": {
+            "isExpression": true
+          }
+        }
+      },
+      "study_one_active_uq": {
+        "columns": {
+          "1": {
+            "isExpression": true
+          }
+        }
+      }
+    }
+  }
+}

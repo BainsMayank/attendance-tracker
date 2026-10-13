@@ -1,0 +1,121 @@
+{
+  "capturedOn": "2026-10-12",
+  "timezone": "Asia/Kolkata",
+  "platform": "Android",
+  "device": {
+    "avd": "Pixel_6a",
+    "systemImage": "Android 15 / API 35, Google Play arm64-v8a",
+    "physicalResolution": [
+      1080,
+      2400
+    ],
+    "captureResolution": [
+      1080,
+      1920
+    ],
+    "density": 420,
+    "theme": "light",
+    "statusBar": {
+      "time": "09:41",
+      "battery": 100,
+      "notifications": "hidden",
+      "wifi": "full demo indicator"
+    }
+  },
+  "app": {
+    "expoSDK": 57,
+    "package": "com.bainsmayank.attendancetracker",
+    "build": "Debug APK built with npx expo run:android; JAVA_HOME overridden to installed JDK 17",
+    "sourceChangedForCaptures": false
+  },
+  "fixture": {
+    "method": "Clean disposable SQLite DB created from existing migrated schema and migration bookkeeping; loaded only into the emulator while the app was stopped",
+    "script": "scripts/create-demo.py",
+    "semester": "Autumn semester",
+    "dates": [
+      "2026-08-03",
+      "2026-12-18"
+    ],
+    "target": 75,
+    "subjectCount": 6,
+    "weeklyClasses": 20,
+    "loggedOccurrences": 202,
+    "attended": 172,
+    "overallPercentage": 85.14851485148515,
+    "attendanceRange": [
+      73.33333333333333,
+      90
+    ],
+    "nearLimit": {
+      "subject": "Creative Systems",
+      "attended": 24,
+      "held": 31,
+      "percentage": 77.41935483870968
+    },
+    "containsPersonalData": false,
+    "fixtureDBCommitted": false
+  },
+  "offlineBackup": {
+    "verified": true,
+    "wifiSetting": 0,
+    "mobileDataSetting": 0,
+    "action": "Tapped Share JSON backup; observed Android share sheet and parsed the newly created local file",
+    "format": "attendance-tracker/app",
+    "schemaVersion": 4,
+    "semesterCount": 1,
+    "subjectCount": 6,
+    "occurrenceCount": 202,
+    "backupSHA256": "a11c1a1da3750d281841a00bc9e5860bb4d67f16de3f4fc2366aea6b25a16afb",
+    "note": "No share destination was selected. No file was sent to another app or person."
+  },
+  "restoration": {
+    "originalDatabaseAndBackupsRestored": true,
+    "originalFilesVerifiedByteForByte": 4,
+    "displaySizeReset": true,
+    "networkRestored": true,
+    "demoStatusBarExited": true
+  },
+  "captures": [
+    {
+      "file": "raw/01-overview.png",
+      "route": "/",
+      "sha256": "09b8f926551e924dab47f2c8abd0399de50cee112371ffc08f93f7e74adca684",
+      "treatment": "Raw adb screencap PNG; no pixel edits"
+    },
+    {
+      "file": "raw/02-subjects.png",
+      "route": "/ (scrolled)",
+      "sha256": "b3ebdf192db237d88a3b4647c007cf843c6cba710fce23046a75ea5cc1ea502f",
+      "treatment": "Raw adb screencap PNG; no pixel edits"
+    },
+    {
+      "file": "raw/03-daily-log.png",
+      "route": "/daily-log",
+      "sha256": "a776ca29d44369e356101073a4d03bd20e2bc8ef74e144b680f0ad7a5e9e4b63",
+      "treatment": "Raw adb screencap PNG; no pixel edits"
+    },
+    {
+      "file": "raw/04-timetable.png",
+      "route": "/timetable",
+      "sha256": "70e0685015777ef23e6a317224cf514fbd505ed12a670108dd3ade530a5b8854",
+      "treatment": "Raw adb screencap PNG; no pixel edits"
+    },
+    {
+      "file": "raw/05-semester-summary.png",
+      "route": "/semester-summary",
+      "sha256": "f1e6364e401b883fa360fbe085583aa4286f40f7b7738c0d4ed64687cad18738",
+      "treatment": "Raw adb screencap PNG; no pixel edits"
+    },
+    {
+      "file": "raw/06-backup.png",
+      "route": "/settings-backup",
+      "sha256": "bfc7dee1495b51da93e5481bd71d483e1d67941a86c0a9035ce1d819b3749368",
+      "treatment": "Raw adb screencap PNG; no pixel edits"
+    }
+  ],
+  "omissions": {
+    "tablet": "Optional tablet variants omitted; no tablet layout was captured.",
+    "home": "Home and subjects are one route; two genuine scroll positions are shown.",
+    "summary": "The semester-summary route is Attendance history; shot 5 headline adjusted to match."
+  }
+}

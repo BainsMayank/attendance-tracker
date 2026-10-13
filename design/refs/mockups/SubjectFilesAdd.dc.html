@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Add to subject</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+.app{--bg:#F6F7FB;--sf:#FFFFFF;--sr:#ECEEF5;--t1:#171923;--t2:#52586A;--sep:#D9DDE8;--ac:#4144D8;--onac:#FFFFFF;--acs:#EEEEFF;--ok:#176640;--oks:#E8F5ED;--bad:#B42338;--bads:#FDECEF;--warn:#805800;--warns:#FFF4D8;--neu:#535D73;--neus:#EEF0F5;--sheet:#FFFFFF;position:relative;overflow:hidden;box-sizing:border-box;background:var(--bg);color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+.app.dark{--bg:#101116;--sf:#1B1D26;--sr:#272A36;--t1:#F5F6FC;--t2:#B3B8CB;--sep:#383D4D;--ac:#B2B4FF;--onac:#18194A;--acs:#292B4E;--ok:#7ED6A3;--oks:#173728;--bad:#FF9CA9;--bads:#45222B;--warn:#F1CA72;--warns:#3D321D;--neu:#B6BFD5;--neus:#292F3C;--sheet:#1B1D26}
+.app *{box-sizing:border-box}
+.app button,.app input{font:inherit;color:inherit}
+.app button{cursor:pointer}
+a{color:var(--ac);text-decoration:none}a:hover{color:var(--ac)}
+.cap{font-size:13px;line-height:18px;font-weight:500;color:var(--t2)}
+.ico{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.opt{width:100%;display:flex;align-items:center;gap:14px;min-height:72px;padding:12px 16px;border:0;background:none;text-align:left;border-top:.5px solid var(--sep)}
+.opt:first-child{border-top:0}
+.oi{width:44px;height:44px;border-radius:12px;background:var(--acs);color:var(--ac);display:flex;align-items:center;justify-content:center;flex:none}
+.btn{height:50px;border-radius:14px;border:0;font-size:17px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px;width:100%}
+.btn.pri{background:var(--ac);color:var(--onac)}
+.btn.sec{background:var(--sr);color:var(--t1)}
+.fchip{height:36px;padding:0 14px;border-radius:18px;border:1px solid var(--sep);background:none;font-size:14px;font-weight:600;white-space:nowrap}
+.fchip.on{background:var(--acs);border-color:var(--ac);color:var(--ac)}
+</style>
+</helmet>
+<div class="app {{themeClass}}" style="width: 390px; height: 844px">
+  <div aria-hidden="true" style="padding: 54px 16px 0">
+    <div style="height: 48px; display: flex; align-items: center; color: var(--ac); font-size: 17px">‹ Subjects</div>
+    <div class="cap">CS201</div>
+    <div style="font-size: 24px; line-height: 30px; font-weight: 700; margin-bottom: 16px">Data Structures &amp; Algorithms</div>
+    <div style="height: 44px; border-radius: 12px; background: var(--sr); margin-bottom: 16px"></div>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+      <div style="height: 112px; border-radius: 16px; background: var(--sf)"></div>
+      <div style="height: 112px; border-radius: 16px; background: var(--sf)"></div>
+      <div style="height: 112px; border-radius: 16px; background: var(--sf)"></div>
+      <div style="height: 112px; border-radius: 16px; background: var(--sf)"></div>
+    </div>
+  </div>
+  <div aria-hidden="true" style="position: absolute; inset: 0; background: rgba(14, 16, 28, 0.4)"></div>
+
+  <section role="dialog" aria-modal="true" aria-label="Add to Data Structures and Algorithms" style="position: absolute; left: 8px; right: 8px; bottom: 8px; border-radius: 32px; background: var(--sheet); padding: 8px 0 20px; box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.18)">
+    <div style="width: 40px; height: 5px; border-radius: 3px; background: var(--sep); margin: 0 auto 10px"></div>
+
+    <sc-if value="{{isMenu}}" hint-placeholder-val="{{true}}">
+      <div style="padding: 4px 20px 12px">
+        <div style="font-size: 20px; font-weight: 700">Add to subject</div>
+        <div class="cap">Data Structures &amp; Algorithms</div>
+      </div>
+      <div style="padding: 0 4px">
+        <button class="opt" onClick="{{noop}}">
+          <span class="oi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5M9 13h6M9 17h4"></path></svg></span>
+          <span style="flex: 1"><span style="display: block; font-size: 17px; font-weight: 600">Documents</span><span class="cap">PDFs, slides and docs from the Files app</span></span>
+        </button>
+        <button class="opt" onClick="{{noop}}">
+          <span class="oi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"></rect><circle cx="9" cy="10" r="2"></circle><path d="M21 16l-5-5-9 9"></path></svg></span>
+          <span style="flex: 1"><span style="display: block; font-size: 17px; font-weight: 600">Photo Library</span><span class="cap">Photos of notes, boards or handouts</span></span>
+        </button>
+        <button class="opt" onClick="{{noop}}">
+          <span class="oi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8a2 2 0 0 1 2-2h2l1.5-2h5L16 6h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"></path><circle cx="12" cy="13" r="3.5"></circle></svg></span>
+          <span style="flex: 1"><span style="display: block; font-size: 17px; font-weight: 600">Camera</span><span class="cap">Scan pages into a PDF, or take a photo</span></span>
+        </button>
+        <button class="opt" onClick="{{toFolder}}">
+          <span class="oi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2.5h8a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><path d="M12 11v6M9 14h6"></path></svg></span>
+          <span style="flex: 1"><span style="display: block; font-size: 17px; font-weight: 600">New Folder</span><span class="cap">Group files by unit, assignment or exam</span></span>
+        </button>
+      </div>
+      <div style="padding: 12px 20px 0; display: flex; flex-direction: column; gap: 10px">
+        <div class="cap">Save into</div>
+        <div role="radiogroup" aria-label="Destination folder" style="display: flex; gap: 8px; flex-wrap: wrap">
+          <sc-for list="{{dests}}" as="d" hint-placeholder-count="4">
+            <button class="{{d.cls}}" role="radio" aria-checked="{{d.on}}" onClick="{{d.pick}}">{{d.name}}</button>
+          </sc-for>
+        </div>
+        <a href="SubjectFiles.dc.html" class="btn sec" style="margin-top: 8px; color: var(--t1)">Cancel</a>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{isFolder}}" hint-placeholder-val="{{false}}">
+      <div style="padding: 4px 20px 0; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <button onClick="{{toMenu}}" style="border: 0; background: none; color: var(--ac); font-size: 17px; height: 44px; padding: 0">Back</button>
+          <div style="font-size: 17px; font-weight: 700">New folder</div>
+          <span style="width: 40px"></span>
+        </div>
+        <label style="display: flex; flex-direction: column; gap: 6px">
+          <span class="cap">Folder name</span>
+          <input value="Mid-sem revision" style="height: 50px; border-radius: 12px; border: 1.5px solid var(--ac); background: var(--bg); padding: 0 14px; font-size: 17px; outline: none">
+        </label>
+        <div class="cap">Suggestions</div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap">
+          <button class="fchip">Unit 4 – Graphs</button>
+          <button class="fchip">Lab Records</button>
+          <button class="fchip">Cheat sheets</button>
+        </div>
+        <a href="SubjectFiles.dc.html" class="btn pri" style="margin-top: 6px; color: var(--onac)">Create folder</a>
+      </div>
+    </sc-if>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["Light","Dark"],"default":"Light"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = { mode: 'menu', dest: 'Lecture Notes' };
+  }
+  renderVals() {
+    const names = ['Lecture Notes', 'Assignments', 'Previous Year Papers', 'Lab Records'];
+    return {
+      themeClass: (this.props.theme ?? 'Light') === 'Dark' ? 'dark' : '',
+      isMenu: this.state.mode === 'menu', isFolder: this.state.mode === 'folder',
+      toFolder: () => this.setState({ mode: 'folder' }),
+      toMenu: () => this.setState({ mode: 'menu' }),
+      noop: () => {},
+      dests: names.map((name) => ({ name, on: this.state.dest === name, cls: this.state.dest === name ? 'fchip on' : 'fchip', pick: () => this.setState({ dest: name }) }))
+    };
+  }
+}
+</script>
+</body>
+</html>

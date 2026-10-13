@@ -1,0 +1,207 @@
+{
+  "checkedAt": "2026-10-12T16:22:59.515Z",
+  "sources": [
+    "https://support.google.com/googleplay/android-developer/answer/9866151",
+    "https://developer.android.com/distribute/google-play/resources/icon-design-specifications",
+    "https://docs.expo.dev/versions/v57.0.0/config/app/"
+  ],
+  "notes": [
+    "8 MiB is a conservative kit cap for graphic uploads; icon hard limit is 1024 KiB.",
+    "Raw captures and launcher assets are not Play listing uploads; their profiles are checked separately.",
+    "Visual review is recorded separately in README.md."
+  ],
+  "results": [
+    {
+      "file": "adaptive-foreground.png",
+      "profile": "Android launcher",
+      "dimensions": "1024×1024",
+      "KiB": 11.6,
+      "result": "PASS",
+      "detail": "RGBA, sRGB"
+    },
+    {
+      "file": "adaptive-monochrome.png",
+      "profile": "Android launcher",
+      "dimensions": "1024×1024",
+      "KiB": 11.5,
+      "result": "PASS",
+      "detail": "RGBA, sRGB"
+    },
+    {
+      "file": "feature-1024x500.png",
+      "profile": "Play feature",
+      "dimensions": "1024×500",
+      "KiB": 21.4,
+      "result": "PASS",
+      "detail": "RGB, sRGB"
+    },
+    {
+      "file": "icon-1024.png",
+      "profile": "preview / source",
+      "dimensions": "1024×1024",
+      "KiB": 16.4,
+      "result": "PASS",
+      "detail": "RGBA, sRGB"
+    },
+    {
+      "file": "icon-512.png",
+      "profile": "Play icon",
+      "dimensions": "512×512",
+      "KiB": 6.9,
+      "result": "PASS",
+      "detail": "RGBA, sRGB"
+    },
+    {
+      "file": "icon-preview-48.png",
+      "profile": "preview / source",
+      "dimensions": "48×48",
+      "KiB": 0.7,
+      "result": "PASS",
+      "detail": "RGBA, sRGB"
+    },
+    {
+      "file": "preview-contact-sheet.png",
+      "profile": "preview / source",
+      "dimensions": "1080×1280",
+      "KiB": 367.8,
+      "result": "PASS",
+      "detail": "RGBA, sRGB"
+    },
+    {
+      "file": "preview-launcher.png",
+      "profile": "preview / source",
+      "dimensions": "1024×512",
+      "KiB": 34.6,
+      "result": "PASS",
+      "detail": "RGB, sRGB"
+    },
+    {
+      "file": "raw/01-overview.png",
+      "profile": "Android raw capture",
+      "dimensions": "1080×1920",
+      "KiB": 328.1,
+      "result": "PASS",
+      "detail": "RGBA, sRGB"
+    },
+    {
+      "file": "raw/02-subjects.png",
+      "profile": "Android raw capture",
+      "dimensions": "1080×1920",
+      "KiB": 350.6,
+      "result": "PASS",
+      "detail": "RGBA, sRGB"
+    },
+    {
+      "file": "raw/03-daily-log.png",
+      "profile": "Android raw capture",
+      "dimensions": "1080×1920",
+      "KiB": 337,
+      "result": "PASS",
+      "detail": "RGBA, sRGB"
+    },
+    {
+      "file": "raw/04-timetable.png",
+      "profile": "Android raw capture",
+      "dimensions": "1080×1920",
+      "KiB": 287.7,
+      "result": "PASS",
+      "detail": "RGBA, sRGB"
+    },
+    {
+      "file": "raw/05-semester-summary.png",
+      "profile": "Android raw capture",
+      "dimensions": "1080×1920",
+      "KiB": 159,
+      "result": "PASS",
+      "detail": "RGBA, sRGB"
+    },
+    {
+      "file": "raw/06-backup.png",
+      "profile": "Android raw capture",
+      "dimensions": "1080×1920",
+      "KiB": 201.6,
+      "result": "PASS",
+      "detail": "RGBA, sRGB"
+    },
+    {
+      "file": "shot-1.png",
+      "profile": "Play phone",
+      "dimensions": "1080×1920",
+      "KiB": 226.7,
+      "result": "PASS",
+      "detail": "RGB, sRGB"
+    },
+    {
+      "file": "shot-2.png",
+      "profile": "Play phone",
+      "dimensions": "1080×1920",
+      "KiB": 241,
+      "result": "PASS",
+      "detail": "RGB, sRGB"
+    },
+    {
+      "file": "shot-3.png",
+      "profile": "Play phone",
+      "dimensions": "1080×1920",
+      "KiB": 240.6,
+      "result": "PASS",
+      "detail": "RGB, sRGB"
+    },
+    {
+      "file": "shot-4.png",
+      "profile": "Play phone",
+      "dimensions": "1080×1920",
+      "KiB": 221.2,
+      "result": "PASS",
+      "detail": "RGB, sRGB"
+    },
+    {
+      "file": "shot-5.png",
+      "profile": "Play phone",
+      "dimensions": "1080×1920",
+      "KiB": 131.2,
+      "result": "PASS",
+      "detail": "RGB, sRGB"
+    },
+    {
+      "file": "shot-6.png",
+      "profile": "Play phone",
+      "dimensions": "1080×1920",
+      "KiB": 163.3,
+      "result": "PASS",
+      "detail": "RGB, sRGB"
+    },
+    {
+      "file": "listing.md: Title",
+      "profile": "Play copy",
+      "dimensions": "29/30 chars",
+      "KiB": "—",
+      "result": "PASS",
+      "detail": "Character count"
+    },
+    {
+      "file": "listing.md: Short description",
+      "profile": "Play copy",
+      "dimensions": "76/80 chars",
+      "KiB": "—",
+      "result": "PASS",
+      "detail": "Character count"
+    },
+    {
+      "file": "listing.md: Full description",
+      "profile": "Play copy",
+      "dimensions": "2270/4000 chars",
+      "KiB": "—",
+      "result": "PASS",
+      "detail": "Character count"
+    },
+    {
+      "file": "app.json",
+      "profile": "Icon configuration",
+      "dimensions": "3 asset paths",
+      "KiB": "—",
+      "result": "PASS",
+      "detail": "Background image must not override the chosen color"
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Attendance history</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+.app{--bg:#F6F7FB;--sf:#FFFFFF;--sr:#ECEEF5;--t1:#171923;--t2:#52586A;--sep:#D9DDE8;--ac:#4144D8;--onac:#FFFFFF;--acs:#EEEEFF;--ok:#176640;--oks:#E8F5ED;--bad:#B42338;--bads:#FDECEF;--warn:#805800;--warns:#FFF4D8;--neu:#535D73;--neus:#EEF0F5;position:relative;overflow:hidden;box-sizing:border-box;background:var(--bg);color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+.app.dark{--bg:#101116;--sf:#1B1D26;--sr:#272A36;--t1:#F5F6FC;--t2:#B3B8CB;--sep:#383D4D;--ac:#B2B4FF;--onac:#18194A;--acs:#292B4E;--ok:#7ED6A3;--oks:#173728;--bad:#FF9CA9;--bads:#45222B;--warn:#F1CA72;--warns:#3D321D;--neu:#B6BFD5;--neus:#292F3C}
+.app *{box-sizing:border-box}
+.app button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--ac);text-decoration:none}a:hover{color:var(--ac)}
+.cap{font-size:13px;line-height:18px;font-weight:500;color:var(--t2)}
+.ico{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.grp{background:var(--sf);border-radius:16px;overflow:hidden}
+.gh{font-size:13px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.4px;margin:6px 4px -6px}
+.chip{height:36px;padding:0 14px;border-radius:18px;border:1px solid var(--sep);background:var(--sf);font-size:14px;font-weight:600;white-space:nowrap}
+.chip.on{background:var(--t1);color:var(--bg);border-color:var(--t1)}
+.r{display:flex;align-items:center;gap:10px;min-height:50px;padding:8px 14px;border-top:.5px solid var(--sep);font-size:15px;color:var(--t1) !important}
+.r:first-child{border-top:0}
+.gl{stroke:var(--sep);stroke-width:1}
+.gt{fill:var(--t2);font-size:10px;font-weight:600}
+</style>
+</helmet>
+<div class="app {{themeClass}}" style="width: 390px; height: 1420px">
+  <nav style="padding: 54px 12px 0 4px; height: 102px; display: flex; align-items: center">
+    <a href="Settings.dc.html" style="display: flex; align-items: center; gap: 2px; height: 44px; padding: 0 8px; font-size: 17px">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>Settings
+    </a>
+  </nav>
+  <main style="padding: 0 16px 40px; display: flex; flex-direction: column; gap: 16px">
+    <h1 style="margin: 0 4px; font-size: 30px; line-height: 36px; font-weight: 700; letter-spacing: -0.3px">Attendance history</h1>
+
+    <div role="radiogroup" aria-label="Semester" style="display: flex; gap: 8px">
+      <sc-for list="{{sems}}" as="s" hint-placeholder-count="2"><button class="{{s.cls}}" role="radio" aria-checked="{{s.on}}" onClick="{{s.pick}}">{{s.label}}</button></sc-for>
+    </div>
+
+    <sc-if value="{{archived}}" hint-placeholder-val="{{false}}">
+      <div style="display: flex; gap: 10px; align-items: center; padding: 10px 14px; border-radius: 12px; background: var(--neus); color: var(--neu); font-size: 14px; font-weight: 600">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
+        Archived semester · read-only
+      </div>
+    </sc-if>
+
+    <section class="grp" style="padding: 18px 16px; display: flex; flex-direction: column; gap: 14px">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end">
+        <div>
+          <div class="cap">{{sem.range}}</div>
+          <div style="font-size: 44px; line-height: 50px; font-weight: 600; letter-spacing: -1px">{{sem.pct}}<span style="font-size: 22px">%</span></div>
+        </div>
+        <div style="text-align: right">
+          <div style="font-size: 15px; font-weight: 600">{{sem.a}} of {{sem.t}}</div>
+          <div class="cap">classes attended</div>
+        </div>
+      </div>
+      <figure style="margin: 0" role="img" aria-label="{{sem.alt}}">
+        <svg viewBox="0 0 326 172" width="326" height="172" aria-hidden="true" style="display: block; overflow: visible">
+          <line class="gl" x1="34" y1="10" x2="322" y2="10"></line><text class="gt" x="0" y="13">100%</text>
+          <line class="gl" x1="34" y1="45" x2="322" y2="45"></line><text class="gt" x="6" y="48">90%</text>
+          <line class="gl" x1="34" y1="80" x2="322" y2="80"></line><text class="gt" x="6" y="83">80%</text>
+          <line class="gl" x1="34" y1="115" x2="322" y2="115"></line><text class="gt" x="6" y="118">70%</text>
+          <line class="gl" x1="34" y1="150" x2="322" y2="150"></line><text class="gt" x="6" y="153">60%</text>
+          <line x1="34" y1="97.5" x2="322" y2="97.5" stroke-dasharray="5 4" style="stroke: var(--warn); stroke-width: 1.5"></line>
+          <text x="322" y="93" text-anchor="end" style="fill: var(--warn); font-size: 10px; font-weight: 700">Target 75%</text>
+          <polyline points="{{sem.area}}" style="fill: var(--acs); stroke: none; opacity: 0.8"></polyline>
+          <polyline points="{{sem.line}}" style="fill: none; stroke: var(--ac); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round"></polyline>
+          <circle cx="{{sem.lastX}}" cy="{{sem.lastY}}" r="4.5" style="fill: var(--ac); stroke: var(--sf); stroke-width: 2"></circle>
+          <text class="gt" x="34" y="168">Wk 1</text>
+          <text class="gt" x="322" y="168" text-anchor="end">Wk {{sem.weeks}}</text>
+        </svg>
+        <figcaption class="cap" style="margin-top: 8px">{{sem.alt}}</figcaption>
+      </figure>
+    </section>
+
+    <div class="gh">By subject</div>
+    <section class="grp">
+      <sc-for list="{{sem.subs}}" as="x" hint-placeholder-count="6">
+        <div class="r">
+          <span style="flex: 1; min-width: 0">{{x.name}}</span>
+          <span style="font-weight: 700; color: {{x.color}}; width: 56px; text-align: right">{{x.pct}}%</span>
+          <span class="cap" style="width: 64px; text-align: right; color: {{x.tcolor}}">{{x.trend}}</span>
+        </div>
+      </sc-for>
+    </section>
+
+    <sc-if value="{{current}}" hint-placeholder-val="{{true}}">
+      <div class="gh">Recent days</div>
+      <section class="grp">
+        <sc-for list="{{days}}" as="d" hint-placeholder-count="5">
+          <a class="r" href="DailyLog.dc.html">
+            <span style="width: 92px; font-weight: 600">{{d.day}}</span>
+            <span style="flex: 1; display: flex; gap: 3px" aria-hidden="true">
+              <sc-for list="{{d.marks}}" as="m" hint-placeholder-count="4"><span style="width: 14px; height: 14px; border-radius: 4px; background: {{m.bg}}; box-shadow: inset 0 0 0 1.5px {{m.ring}}"></span></sc-for>
+            </span>
+            <span class="cap">{{d.text}}</span>
+          </a>
+        </sc-for>
+      </section>
+      <a href="DailyLogCalendar.dc.html" style="align-self: center; height: 44px; display: flex; align-items: center; font-size: 15px; font-weight: 600">Open full calendar</a>
+    </sc-if>
+
+    <button style="height: 50px; border: 0; border-radius: 14px; background: var(--sf); color: var(--ac); font-size: 16px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 20px; height: 20px"><path d="M12 15V4M7 9l5-5 5 5M5 20h14"></path></svg>Export as CSV
+    </button>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["Light","Dark"],"default":"Light"},"$preview":{"width":390,"height":1420}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = { sem: 0 };
+  }
+  renderVals() {
+    const color = (p) => (p >= 77 ? 'var(--ok)' : p >= 75 ? 'var(--warn)' : 'var(--bad)');
+    const sems = [
+      {
+        label: 'Fall 2026', range: '27 Jul – 4 Dec 2026 · week 12', a: 81, t: 103,
+        series: [100, 92, 88, 85, 84, 82, 80, 79, 80, 78.9, 79.2, 78.6],
+        subs: [['Data Structures & Algorithms', 81.8, 1.2], ['Operating Systems', 70.0, -3.2], ['Discrete Mathematics', 87.5, 0.5], ['Digital Logic Lab', 75.0, -8.3], ['Economics for Engineers', 68.8, -2.1], ['Technical Writing', 88.9, 0.0]]
+      },
+      {
+        label: 'Spring 2026', range: '5 Jan – 8 May 2026 · final', a: 331, t: 397,
+        series: [100, 95, 90, 87, 86, 85, 84, 83, 84, 83.5, 83, 82.8, 83.1, 83.4, 83.2, 83.4],
+        subs: [['Programming in C', 88.2, 0], ['Engineering Mathematics II', 80.6, 0], ['Engineering Physics', 77.1, 0], ['Basic Electrical Engg.', 84.0, 0], ['Engineering Graphics', 86.5, 0]]
+      }
+    ];
+    const s = sems[this.state.sem];
+    const n = s.series.length;
+    const pts = s.series.map((v, i) => [34 + (i * 288) / (n - 1), 10 + (100 - v) * 3.5]);
+    const line = pts.map(([x, y]) => x.toFixed(1) + ',' + y.toFixed(1)).join(' ');
+    const area = '34,150 ' + line + ' 322,150';
+    const last = s.series[n - 1];
+    const pct = ((s.a / s.t) * 100).toFixed(1);
+    const sem = {
+      range: s.range, a: s.a, t: s.t, pct, line, area, weeks: n,
+      lastX: pts[n - 1][0].toFixed(1), lastY: pts[n - 1][1].toFixed(1),
+      alt: 'Overall attendance started at ' + s.series[0] + '% in week 1 and is ' + last + '% in week ' + n + ', ' + (last >= 75 ? 'above' : 'below') + ' the 75% target.',
+      subs: s.subs.map(([name, p, d]) => ({
+        name, pct: p.toFixed(1), color: color(p),
+        trend: this.state.sem === 1 ? 'Final' : d === 0 ? '— 2 wks' : (d > 0 ? '▲ ' : '▼ ') + Math.abs(d).toFixed(1),
+        tcolor: this.state.sem === 1 || d === 0 ? 'var(--t2)' : d > 0 ? 'var(--ok)' : 'var(--bad)'
+      }))
+    };
+    const mk = (codes) => codes.split('').map((c) => ({
+      bg: c === 'p' ? 'var(--ok)' : c === 'a' ? 'var(--bad)' : c === 'n' ? 'var(--neus)' : 'transparent',
+      ring: c === 'u' ? 'var(--sep)' : c === 'n' ? 'var(--neu)' : 'transparent'
+    }));
+    const days = [
+      { day: 'Mon 12 Oct', marks: mk('ppuuu'), text: '2 of 5 marked' },
+      { day: 'Fri 9 Oct', marks: mk('pppp'), text: 'All present' },
+      { day: 'Thu 8 Oct', marks: mk('aaa'), text: 'All absent' },
+      { day: 'Wed 7 Oct', marks: mk('pppp'), text: 'All present' },
+      { day: 'Tue 6 Oct', marks: mk('ppap'), text: '3 present · 1 absent' }
+    ];
+    return {
+      themeClass: (this.props.theme ?? 'Light') === 'Dark' ? 'dark' : '',
+      sems: sems.map((x, i) => ({ label: x.label + (i === 1 ? ' · archived' : ''), on: this.state.sem === i, cls: this.state.sem === i ? 'chip on' : 'chip', pick: () => this.setState({ sem: i }) })),
+      sem, archived: this.state.sem === 1, current: this.state.sem === 0, days
+    };
+  }
+}
+</script>
+</body>
+</html>

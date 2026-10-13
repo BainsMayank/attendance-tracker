@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Settings</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+.app{--bg:#F6F7FB;--sf:#FFFFFF;--sr:#ECEEF5;--t1:#171923;--t2:#52586A;--sep:#D9DDE8;--ac:#4144D8;--onac:#FFFFFF;--acs:#EEEEFF;--ok:#176640;--oks:#E8F5ED;--bad:#B42338;--bads:#FDECEF;--warn:#805800;--warns:#FFF4D8;--neu:#535D73;--neus:#EEF0F5;--bar:rgba(255,255,255,.86);position:relative;overflow:hidden;box-sizing:border-box;background:var(--bg);color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+.app.dark{--bg:#101116;--sf:#1B1D26;--sr:#272A36;--t1:#F5F6FC;--t2:#B3B8CB;--sep:#383D4D;--ac:#B2B4FF;--onac:#18194A;--acs:#292B4E;--ok:#7ED6A3;--oks:#173728;--bad:#FF9CA9;--bads:#45222B;--warn:#F1CA72;--warns:#3D321D;--neu:#B6BFD5;--neus:#292F3C;--bar:rgba(27,29,38,.88)}
+.app *{box-sizing:border-box}
+.app button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--ac);text-decoration:none}a:hover{color:var(--ac)}
+.cap{font-size:13px;line-height:18px;font-weight:500;color:var(--t2)}
+.ico{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.gh{font-size:13px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.4px;margin:10px 16px -6px}
+.grp{background:var(--sf);border-radius:16px;overflow:hidden}
+.row{display:flex;align-items:center;gap:12px;min-height:52px;padding:6px 14px;font-size:16px;color:var(--t1) !important;width:100%;border:0;background:none;text-align:left;position:relative}
+.row+.row::before{content:"";position:absolute;top:0;left:56px;right:0;border-top:.5px solid var(--sep)}
+.ti{width:30px;height:30px;border-radius:8px;background:var(--acs);color:var(--ac);display:flex;align-items:center;justify-content:center;flex:none}
+.ti svg{width:18px;height:18px}
+.val{font-size:15px;color:var(--t2)}
+.chev{width:16px;height:16px;color:var(--t2)}
+.sw{width:51px;height:31px;border-radius:16px;border:0;background:var(--sr);position:relative;padding:0;flex:none;transition:background .18s;box-shadow:inset 0 0 0 1px var(--sep)}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.22);transition:left .18s}
+.sw.on{background:var(--ok);box-shadow:none}
+.sw.on::after{left:22px}
+.seg{display:flex;background:var(--sr);border-radius:10px;padding:2px}
+.seg button{height:32px;padding:0 12px;border:0;background:none;border-radius:8px;font-size:14px;font-weight:600;color:var(--t2)}
+.seg button.on{background:var(--sf);color:var(--t1);box-shadow:0 1px 3px rgba(20,22,40,.14)}
+.tabbar{position:absolute;left:16px;right:16px;bottom:24px;height:64px;border-radius:32px;background:var(--bar);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 8px 28px rgba(20,22,40,.14),0 0 0 .5px var(--sep);display:flex;padding:6px;z-index:5}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:26px;font-size:11px;font-weight:600;color:var(--t2) !important}
+.tab.on{background:var(--acs);color:var(--ac) !important}
+</style>
+</helmet>
+<div class="app {{themeClass}}" style="width: 390px; height: 1800px">
+  <header style="padding: 62px 20px 12px">
+    <h1 style="margin: 0; font-size: 34px; line-height: 41px; font-weight: 700; letter-spacing: -0.4px">Settings</h1>
+  </header>
+
+  <main style="padding: 4px 16px 120px; display: flex; flex-direction: column; gap: 14px">
+    <section class="grp" style="padding: 16px; display: flex; flex-direction: column; gap: 14px">
+      <div style="display: flex; align-items: center; gap: 14px">
+        <span aria-hidden="true" style="width: 56px; height: 56px; border-radius: 28px; background: var(--ac); color: var(--onac); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700">RK</span>
+        <div style="flex: 1">
+          <div style="font-size: 19px; font-weight: 700">Riya Kapoor</div>
+          <div class="cap">Signed in with Apple</div>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; background: {{syncBg}}">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 20px; height: 20px; color: {{syncFg}}"><path d="M7 18.5a4.5 4.5 0 0 1-.6-9 6 6 0 0 1 11.4 1.6A4 4 0 0 1 17.5 18.5z"></path></svg>
+        <span role="status" style="flex: 1; font-size: 14px; font-weight: 600; color: {{syncFg}}">{{syncText}}</span>
+        <button onClick="{{syncNow}}" disabled="{{syncOff}}" style="border: 0; background: none; color: var(--ac); font-size: 14px; font-weight: 700; height: 36px; opacity: {{syncBtnOp}}">Sync now</button>
+      </div>
+    </section>
+
+    <div class="gh">Semester</div>
+    <section class="grp">
+      <a class="row" href="#"><span class="ti"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10L12 5 2 10l10 5z"></path><path d="M6 12v5c3 2 9 2 12 0v-5"></path></svg></span><span style="flex: 1">Current semester</span><span class="val">Fall 2026</span><svg class="ico chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></a>
+      <a class="row" href="#"><span class="ti"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1"></circle></svg></span><span style="flex: 1">Attendance target</span><span class="val">75%</span><svg class="ico chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></a>
+      <a class="row" href="#"><span class="ti"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></span><span style="flex: 1">Holidays &amp; breaks</span><span class="val">3</span><svg class="ico chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></a>
+      <a class="row" href="History.dc.html"><span class="ti"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12a8.5 8.5 0 1 0 2.5-6"></path><path d="M3 4v4h4M12 8v4l3 2"></path></svg></span><span style="flex: 1">Attendance history</span><svg class="ico chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></a>
+      <a class="row" href="#"><span class="ti"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="5" rx="1.5"></rect><path d="M5 9v10a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 19V9M10 13h4"></path></svg></span><span style="flex: 1">Past semesters</span><span class="val">2 archived</span><svg class="ico chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></a>
+    </section>
+
+    <div class="gh">Notifications</div>
+    <section class="grp">
+      <a class="row" href="Notifications.dc.html"><span class="ti"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"></path><path d="M10 20.5a2 2 0 0 0 4 0"></path></svg></span><span style="flex: 1">Reminders &amp; alerts</span><span class="val">4 on</span><svg class="ico chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></a>
+    </section>
+
+    <div class="gh">Sync &amp; data</div>
+    <section class="grp">
+      <div class="row"><span class="ti"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18.5a4.5 4.5 0 0 1-.6-9 6 6 0 0 1 11.4 1.6A4 4 0 0 1 17.5 18.5z"></path></svg></span><span style="flex: 1" id="icl">Sync with iCloud</span><button class="{{syncCls}}" role="switch" aria-checked="{{sync}}" aria-labelledby="icl" onClick="{{toggleSync}}"></button></div>
+      <button class="row"><span class="ti"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg></span><span style="flex: 1">Back up now</span><span class="val">Today, 09:41</span></button>
+      <a class="row" href="#"><span class="ti"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4M7 9l5-5 5 5M5 20h14"></path></svg></span><span style="flex: 1">Export data</span><span class="val">JSON or CSV</span><svg class="ico chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></a>
+      <a class="row" href="#"><span class="ti"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6L20 8.5"></path><path d="M20 4v4.5h-4.5"></path></svg></span><span style="flex: 1">Restore from backup</span><svg class="ico chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></a>
+    </section>
+
+    <div class="gh">Appearance</div>
+    <section class="grp">
+      <div class="row"><span class="ti"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"></path></svg></span><span style="flex: 1">Theme</span>
+        <div class="seg" role="radiogroup" aria-label="Theme">
+          <sc-for list="{{themes}}" as="t" hint-placeholder-count="3"><button class="{{t.cls}}" role="radio" aria-checked="{{t.on}}" onClick="{{t.pick}}">{{t.label}}</button></sc-for>
+        </div>
+      </div>
+      <div class="row"><span class="ti"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2.5"></rect><path d="M3 9v6M21 9v6"></path></svg></span><span style="flex: 1" id="hap">Haptics</span><button class="{{hapCls}}" role="switch" aria-checked="{{hap}}" aria-labelledby="hap" onClick="{{toggleHap}}"></button></div>
+      <div class="row"><span class="ti"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="2.5"></rect><path d="M3 9.5h18M8 2.5v4M16 2.5v4"></path></svg></span><span style="flex: 1" id="wk">Week starts on Monday</span><button class="{{monCls}}" role="switch" aria-checked="{{mon}}" aria-labelledby="wk" onClick="{{toggleMon}}"></button></div>
+    </section>
+
+    <div class="gh">About</div>
+    <section class="grp">
+      <a class="row" href="#"><span class="ti"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"></path></svg></span><span style="flex: 1">Privacy</span><span class="val">No ads, no tracking</span><svg class="ico chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></a>
+      <a class="row" href="#"><span class="ti"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"></path></svg></span><span style="flex: 1">Send feedback</span><svg class="ico chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></a>
+    </section>
+
+    <section class="grp" style="margin-top: 10px">
+      <a class="row" href="ResetSemester.dc.html" style="color: var(--warn) !important; font-weight: 600"><span class="ti" style="background: var(--warns); color: var(--warn)"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6L20 8.5"></path><path d="M20 4v4.5h-4.5"></path></svg></span><span style="flex: 1">Reset semester</span><svg class="ico chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></a>
+      <button class="row" style="font-weight: 600"><span class="ti" style="background: var(--neus); color: var(--neu)"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 16l-4-4 4-4M6 12h10"></path></svg></span><span style="flex: 1">Log out</span></button>
+      <button class="row" style="color: var(--bad) !important; font-weight: 600"><span class="ti" style="background: var(--bads); color: var(--bad)"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg></span><span style="flex: 1">Delete account</span></button>
+    </section>
+    <div class="cap" style="text-align: center; margin-top: 4px">Attendance Tracker 1.0 · Your data lives on this iPhone and in your iCloud.</div>
+  </main>
+
+  <nav class="tabbar" aria-label="Tabs">
+    <a class="tab" href="Main.dc.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h14v14H6a2 2 0 0 0-2 2zm0 0a2 2 0 0 0 2 2h14"></path></svg>Subjects</a>
+    <a class="tab" href="DailyLog.dc.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="2.5"></rect><path d="M3 9.5h18M8 2.5v4M16 2.5v4M9 15l2 2 4-4"></path></svg>Daily Log</a>
+    <a class="tab" href="Timetable.dc.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2.5"></rect><path d="M3 9h18M9 3v18"></path></svg>Timetable</a>
+    <a class="tab on" href="Settings.dc.html" aria-current="page"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path></svg>Settings</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["Light","Dark"],"default":"Light"},"$preview":{"width":390,"height":1800}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = { sync: true, hap: true, mon: true, theme: null, synced: '2 min ago' };
+  }
+  renderVals() {
+    const s = this.state;
+    const propDark = (this.props.theme ?? 'Light') === 'Dark';
+    const dark = s.theme === 'Dark' ? true : s.theme === 'Light' ? false : propDark;
+    const sw = (on) => (on ? 'sw on' : 'sw');
+    return {
+      themeClass: dark ? 'dark' : '',
+      sync: s.sync, syncCls: sw(s.sync), toggleSync: () => this.setState({ sync: !s.sync }),
+      hap: s.hap, hapCls: sw(s.hap), toggleHap: () => this.setState({ hap: !s.hap }),
+      mon: s.mon, monCls: sw(s.mon), toggleMon: () => this.setState({ mon: !s.mon }),
+      syncText: s.sync ? 'iCloud sync on · synced ' + s.synced : 'iCloud sync off · data stays on this iPhone',
+      syncBg: s.sync ? 'var(--oks)' : 'var(--neus)', syncFg: s.sync ? 'var(--ok)' : 'var(--neu)',
+      syncOff: !s.sync, syncBtnOp: s.sync ? '1' : '0.4',
+      syncNow: () => this.setState({ synced: 'just now' }),
+      themes: ['System', 'Light', 'Dark'].map((label) => {
+        const on = label === 'System' ? s.theme === null : s.theme === label;
+        return { label, on, cls: on ? 'on' : '', pick: () => this.setState({ theme: label === 'System' ? null : label }) };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Timetable</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+.app{--bg:#F6F7FB;--sf:#FFFFFF;--sr:#ECEEF5;--t1:#171923;--t2:#52586A;--sep:#D9DDE8;--ac:#4144D8;--onac:#FFFFFF;--acs:#EEEEFF;--ok:#176640;--oks:#E8F5ED;--bad:#B42338;--bads:#FDECEF;--warn:#805800;--warns:#FFF4D8;--neu:#535D73;--neus:#EEF0F5;--bar:rgba(255,255,255,.86);position:relative;overflow:hidden;box-sizing:border-box;background:var(--bg);color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+.app.dark{--bg:#101116;--sf:#1B1D26;--sr:#272A36;--t1:#F5F6FC;--t2:#B3B8CB;--sep:#383D4D;--ac:#B2B4FF;--onac:#18194A;--acs:#292B4E;--ok:#7ED6A3;--oks:#173728;--bad:#FF9CA9;--bads:#45222B;--warn:#F1CA72;--warns:#3D321D;--neu:#B6BFD5;--neus:#292F3C;--bar:rgba(27,29,38,.88)}
+.app *{box-sizing:border-box}
+.app button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--ac);text-decoration:none}a:hover{color:var(--ac)}
+.card{background:var(--sf);border-radius:16px}
+.cap{font-size:13px;line-height:18px;font-weight:500;color:var(--t2)}
+.ico{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ib{width:44px;height:44px;border-radius:22px;border:0;background:var(--sf);color:var(--ac);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 .5px var(--sep);flex:none}
+.day{height:56px;border-radius:14px;border:0;background:var(--sf);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;box-shadow:inset 0 0 0 1px var(--sep)}
+.day b{font-size:15px;font-weight:700}
+.day span{font-size:11px;font-weight:600;color:var(--t2)}
+.day.on{background:var(--t1);box-shadow:none}
+.day.on b{color:var(--bg)}
+.day.on span{color:var(--bg);opacity:.75}
+.slot{display:flex;align-items:stretch;gap:12px;padding:12px 6px 12px 12px;border-radius:16px;background:var(--sf);color:var(--t1) !important}
+.rail{width:4px;border-radius:2px;flex:none}
+.tag{display:inline-flex;align-items:center;height:20px;padding:0 7px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:.2px}
+.lrow{display:flex;align-items:center;gap:12px;min-height:52px;padding:0 12px 0 14px;border-top:.5px solid var(--sep);color:var(--t1) !important;font-size:16px}
+.lrow:first-child{border-top:0}
+.tabbar{position:absolute;left:16px;right:16px;bottom:24px;height:64px;border-radius:32px;background:var(--bar);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 8px 28px rgba(20,22,40,.14),0 0 0 .5px var(--sep);display:flex;padding:6px;z-index:5}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:26px;font-size:11px;font-weight:600;color:var(--t2) !important}
+.tab.on{background:var(--acs);color:var(--ac) !important}
+</style>
+</helmet>
+<div class="app {{themeClass}}" style="width: 390px; height: 1300px">
+  <header style="padding: 62px 20px 12px; display: flex; align-items: flex-end; justify-content: space-between">
+    <div>
+      <div class="cap">Fall 2026 · 20 classes a week</div>
+      <h1 style="margin: 2px 0 0; font-size: 34px; line-height: 41px; font-weight: 700; letter-spacing: -0.4px">Timetable</h1>
+    </div>
+    <a href="TimetableSlot.dc.html" class="ib" aria-label="Add a class"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></a>
+  </header>
+
+  <main style="padding: 4px 16px 120px; display: flex; flex-direction: column; gap: 16px">
+    <a href="TimetableImport.dc.html" class="card" style="display: flex; gap: 14px; align-items: center; padding: 16px; border-radius: 20px; background: var(--acs); color: var(--t1)">
+      <span style="width: 48px; height: 48px; border-radius: 14px; background: var(--ac); color: var(--onac); display: flex; align-items: center; justify-content: center; flex: none">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"></path><path d="M8 9h8M8 12h8M8 15h5"></path></svg>
+      </span>
+      <span style="flex: 1">
+        <span style="display: block; font-size: 17px; font-weight: 700">Import from a photo</span>
+        <span class="cap" style="display: block; color: var(--t2)">Let ChatGPT or Gemini read your timetable, then paste the result here. Free.</span>
+      </span>
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px; color: var(--ac)"><path d="M9 5l7 7-7 7"></path></svg>
+    </a>
+
+    <div role="tablist" aria-label="Day of week" style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px">
+      <sc-for list="{{days}}" as="d" hint-placeholder-count="6">
+        <button class="{{d.cls}}" role="tab" aria-selected="{{d.on}}" onClick="{{d.pick}}"><b>{{d.short}}</b><span>{{d.count}}</span></button>
+      </sc-for>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 0 4px">
+      <h2 style="margin: 0; font-size: 20px; font-weight: 700">{{dayName}}</h2>
+      <span class="cap">{{dayMeta}}</span>
+    </div>
+
+    <sc-if value="{{empty}}" hint-placeholder-val="{{false}}">
+      <div class="card" style="padding: 28px 20px; text-align: center; display: flex; flex-direction: column; gap: 6px; align-items: center">
+        <div style="font-size: 17px; font-weight: 600">No classes on {{dayName}}</div>
+        <div class="cap">Add one if you have a weekend lab or an extra slot.</div>
+        <a href="TimetableSlot.dc.html" style="font-weight: 600; height: 44px; display: flex; align-items: center">Add a class</a>
+      </div>
+    </sc-if>
+
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <sc-for list="{{items}}" as="it" hint-placeholder-count="5">
+        <sc-if value="{{it.isGap}}" hint-placeholder-val="{{false}}">
+          <div class="cap" style="display: flex; align-items: center; gap: 10px; padding: 2px 8px">
+            <span style="flex: 1; height: 0; border-top: 1px dashed var(--sep)"></span>{{it.label}}<span style="flex: 1; height: 0; border-top: 1px dashed var(--sep)"></span>
+          </div>
+        </sc-if>
+        <sc-if value="{{it.isClass}}" hint-placeholder-val="{{true}}">
+          <a class="slot" href="TimetableSlot.dc.html" aria-label="Edit {{it.name}}, {{it.start}} to {{it.end}}">
+            <span class="rail" style="background: {{it.rail}}"></span>
+            <span style="width: 50px; flex: none; display: flex; flex-direction: column; justify-content: center">
+              <span style="font-size: 15px; font-weight: 700">{{it.start}}</span>
+              <span class="cap">{{it.end}}</span>
+            </span>
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; justify-content: center">
+              <span style="font-size: 16px; line-height: 21px; font-weight: 600">{{it.name}}</span>
+              <span style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
+                <span class="tag" style="background: {{it.tagBg}}; color: {{it.tagFg}}">{{it.type}}</span>
+                <span class="cap" style="display: inline-flex; align-items: center; gap: 3px"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 14px; height: 14px"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>{{it.venue}}</span>
+              </span>
+            </span>
+            <span style="width: 44px; display: flex; align-items: center; justify-content: center; color: var(--t2)"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"></path><path d="M13.5 6.5l4 4"></path></svg></span>
+          </a>
+        </sc-if>
+      </sc-for>
+    </div>
+
+    <h2 style="margin: 8px 4px -4px; font-size: 20px; font-weight: 700">Manage</h2>
+    <section class="card" style="padding: 2px 0">
+      <a class="lrow" href="#"><span style="flex: 1">Subjects</span><span class="cap">6</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 16px; height: 16px; color: var(--t2)"><path d="M9 5l7 7-7 7"></path></svg></a>
+      <a class="lrow" href="#"><span style="flex: 1">Class types</span><span class="cap">Lecture, Tutorial, Lab</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 16px; height: 16px; color: var(--t2)"><path d="M9 5l7 7-7 7"></path></svg></a>
+      <a class="lrow" href="#"><span style="flex: 1">Semester dates</span><span class="cap">27 Jul – 4 Dec</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 16px; height: 16px; color: var(--t2)"><path d="M9 5l7 7-7 7"></path></svg></a>
+      <a class="lrow" href="#"><span style="flex: 1">Export as JSON</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px; color: var(--t2)"><path d="M12 15V4M7 9l5-5 5 5M5 20h14"></path></svg></a>
+    </section>
+  </main>
+
+  <nav class="tabbar" aria-label="Tabs">
+    <a class="tab" href="Main.dc.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h14v14H6a2 2 0 0 0-2 2zm0 0a2 2 0 0 0 2 2h14"></path></svg>Subjects</a>
+    <a class="tab" href="DailyLog.dc.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="2.5"></rect><path d="M3 9.5h18M8 2.5v4M16 2.5v4M9 15l2 2 4-4"></path></svg>Daily Log</a>
+    <a class="tab on" href="Timetable.dc.html" aria-current="page"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2.5"></rect><path d="M3 9h18M9 3v18"></path></svg>Timetable</a>
+    <a class="tab" href="Settings.dc.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path></svg>Settings</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["Light","Dark"],"default":"Light"},"$preview":{"width":390,"height":1300}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = { day: 0 };
+  }
+  renderVals() {
+    const N = { DSA: 'Data Structures & Algorithms', DSL: 'Data Structures Lab', OS: 'Operating Systems', DM: 'Discrete Mathematics', DL: 'Digital Logic Lab', EC: 'Economics for Engineers', TW: 'Technical Writing' };
+    const c = (s, start, end, venue, type) => ({ s, start, end, venue, type });
+    const week = [
+      ['Monday', 'Mon', [c('DSA', '09:00', '09:55', 'LH-204', 'Lecture'), c('OS', '10:00', '10:55', 'LH-204', 'Lecture'), c('DM', '11:10', '12:05', 'T-12', 'Tutorial'), c('DL', '14:00', '16:45', 'ECE Lab 2', 'Lab'), c('EC', '16:50', '17:45', 'LH-108', 'Lecture')]],
+      ['Tuesday', 'Tue', [c('OS', '09:00', '09:55', 'LH-204', 'Lecture'), c('DM', '10:00', '10:55', 'LH-201', 'Lecture'), c('EC', '11:10', '12:05', 'LH-108', 'Lecture'), c('TW', '14:00', '14:55', 'Seminar Rm 3', 'Lecture')]],
+      ['Wednesday', 'Wed', [c('DSA', '09:00', '09:55', 'LH-204', 'Lecture'), c('DM', '10:00', '10:55', 'LH-201', 'Lecture'), c('DSL', '11:10', '13:00', 'CS Lab 1', 'Lab'), c('EC', '15:00', '15:55', 'LH-108', 'Lecture')]],
+      ['Thursday', 'Thu', [c('OS', '09:00', '09:55', 'LH-204', 'Lecture'), c('DSA', '10:00', '10:55', 'LH-204', 'Lecture'), c('DL', '14:00', '16:45', 'ECE Lab 2', 'Lab')]],
+      ['Friday', 'Fri', [c('DM', '09:00', '09:55', 'T-12', 'Tutorial'), c('OS', '10:00', '10:55', 'T-08', 'Tutorial'), c('TW', '11:10', '12:05', 'Seminar Rm 3', 'Lecture'), c('EC', '14:00', '14:55', 'LH-108', 'Lecture')]],
+      ['Saturday', 'Sat', []]
+    ];
+    const typeStyle = {
+      Lecture: ['var(--acs)', 'var(--ac)', 'var(--ac)'],
+      Tutorial: ['var(--neus)', 'var(--neu)', 'var(--neu)'],
+      Lab: ['var(--oks)', 'var(--ok)', 'var(--ok)']
+    };
+    const mins = (s) => { const [h, m] = s.split(':').map(Number); return h * 60 + m; };
+    const sel = this.state.day;
+    const [dayName, , list] = week[sel];
+    const items = [];
+    list.forEach((x, i) => {
+      if (i > 0) {
+        const gap = mins(x.start) - mins(list[i - 1].end);
+        if (gap >= 30) {
+          const h = Math.floor(gap / 60), m = gap % 60;
+          items.push({ isGap: true, isClass: false, label: 'Free · ' + (h ? h + ' h ' : '') + (m ? m + ' min' : '') });
+        }
+      }
+      const st = typeStyle[x.type];
+      items.push({ isGap: false, isClass: true, name: N[x.s], start: x.start, end: x.end, venue: x.venue, type: x.type, tagBg: st[0], tagFg: st[1], rail: st[2] });
+    });
+    const total = list.reduce((acc, x) => acc + mins(x.end) - mins(x.start), 0);
+    return {
+      themeClass: (this.props.theme ?? 'Light') === 'Dark' ? 'dark' : '',
+      days: week.map(([, short, l], i) => ({ short, count: l.length ? l.length + ' cls' : '—', on: i === sel, cls: i === sel ? 'day on' : 'day', pick: () => this.setState({ day: i }) })),
+      dayName, items, empty: list.length === 0,
+      dayMeta: list.length ? list.length + ' classes · ' + list[0].start + '–' + list[list.length - 1].end + ' · ' + (total / 60).toFixed(1) + ' h' : ''
+    };
+  }
+}
+</script>
+</body>
+</html>

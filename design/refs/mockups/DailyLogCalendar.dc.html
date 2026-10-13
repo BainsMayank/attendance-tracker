@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Jump to date</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+.app{--bg:#F6F7FB;--sf:#FFFFFF;--sr:#ECEEF5;--t1:#171923;--t2:#52586A;--sep:#D9DDE8;--ac:#4144D8;--onac:#FFFFFF;--acs:#EEEEFF;--ok:#176640;--oks:#E8F5ED;--bad:#B42338;--bads:#FDECEF;--warn:#805800;--warns:#FFF4D8;--neu:#535D73;--neus:#EEF0F5;position:relative;overflow:hidden;box-sizing:border-box;background:#2A2C38;color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+.app.dark{--bg:#101116;--sf:#1B1D26;--sr:#272A36;--t1:#F5F6FC;--t2:#B3B8CB;--sep:#383D4D;--ac:#B2B4FF;--onac:#18194A;--acs:#292B4E;--ok:#7ED6A3;--oks:#173728;--bad:#FF9CA9;--bads:#45222B;--warn:#F1CA72;--warns:#3D321D;--neu:#B6BFD5;--neus:#292F3C;background:#000}
+.app *{box-sizing:border-box}
+.app button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--ac);text-decoration:none}a:hover{color:var(--ac)}
+.cap{font-size:13px;line-height:18px;font-weight:500;color:var(--t2)}
+.ico{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ib{width:44px;height:44px;border-radius:22px;border:0;background:var(--sr);color:var(--t1);display:flex;align-items:center;justify-content:center;flex:none}
+.cell{height:50px;border:0;background:none;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:16px;font-weight:600;padding:0}
+.cell.blank{visibility:hidden}
+.cell.off{color:var(--t2);font-weight:400}
+.cell.today{box-shadow:inset 0 0 0 2px var(--ac);color:var(--ac)}
+.cell.sel{background:var(--ac);color:var(--onac) !important;box-shadow:none}
+.cell.sel .mk{filter:none;outline:1.5px solid var(--onac);outline-offset:1px}
+.mk{display:block;width:7px;height:7px}
+.mk.P{background:var(--ok);border-radius:50%}
+.mk.M{border:2px solid var(--warn);border-radius:50%}
+.mk.A{background:var(--bad);height:3px;width:10px;border-radius:2px;margin:2px 0}
+.mk.H{border:2px solid var(--neu);border-radius:2px}
+.mk.N{visibility:hidden}
+.lg{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--t2)}
+.btn{height:50px;border-radius:14px;border:0;font-size:17px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn.pri{background:var(--ac);color:var(--onac) !important}
+</style>
+</helmet>
+<div class="app {{themeClass}}" style="width: 390px; height: 900px">
+  <section role="dialog" aria-modal="true" aria-label="Jump to date" style="position: absolute; top: 58px; left: 0; right: 0; bottom: 0; border-radius: 28px 28px 0 0; background: var(--bg); padding: 8px 16px 24px; display: flex; flex-direction: column; gap: 16px">
+    <div style="width: 40px; height: 5px; border-radius: 3px; background: var(--sep); margin: 0 auto"></div>
+    <div style="display: flex; align-items: center; justify-content: space-between">
+      <button onClick="{{goToday}}" style="border: 0; background: none; color: var(--ac); font-size: 17px; height: 44px; padding: 0 4px">Today</button>
+      <div style="font-size: 17px; font-weight: 700">Jump to date</div>
+      <a href="DailyLog.dc.html" class="ib" aria-label="Close"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px"><path d="M6 6l12 12M18 6L6 18"></path></svg></a>
+    </div>
+
+    <div style="background: var(--sf); border-radius: 20px; padding: 14px 10px 12px">
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 0 4px 10px">
+        <button class="ib" aria-label="Previous month" style="background: none"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button>
+        <div style="font-size: 20px; font-weight: 700">October 2026</div>
+        <button class="ib" aria-label="Next month" style="background: none"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button>
+      </div>
+      <div aria-hidden="true" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; text-align: center; font-size: 12px; font-weight: 700; color: var(--t2); padding-bottom: 6px">
+        <span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span><span>SUN</span>
+      </div>
+      <div role="grid" aria-label="October 2026" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px">
+        <sc-for list="{{cells}}" as="c" hint-placeholder-count="35">
+          <button class="{{c.cls}}" aria-label="{{c.aria}}" aria-hidden="{{c.blank}}" aria-pressed="{{c.selected}}" disabled="{{c.blank}}" onClick="{{c.pick}}">
+            <span>{{c.d}}</span><span class="mk {{c.st}}"></span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 12px; padding: 0 6px">
+      <span class="lg"><span class="mk P"></span>All present</span>
+      <span class="lg"><span class="mk M"></span>Mixed</span>
+      <span class="lg"><span class="mk A"></span>Absent</span>
+      <span class="lg"><span class="mk H"></span>Holiday</span>
+    </div>
+
+    <div style="background: var(--sf); border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+      <div>
+        <div style="font-size: 17px; font-weight: 700">{{selTitle}}</div>
+        <div class="cap" style="font-size: 15px; line-height: 20px">{{selInfo}}</div>
+      </div>
+      <a href="DailyLog.dc.html" class="btn pri">Open this day</a>
+    </div>
+
+    <div class="cap" style="text-align: center">October so far · 22 present · 4 absent · 1 holiday</div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["Light","Dark"],"default":"Light"},"$preview":{"width":390,"height":900}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = { sel: 12 };
+  }
+  renderVals() {
+    const wd = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const past = {
+      1: ['P', '4 classes · all present'], 2: ['H', 'Holiday · Gandhi Jayanti'], 5: ['P', '5 classes · all present'],
+      6: ['M', '4 classes · 3 present, 1 absent'], 7: ['P', '4 classes · all present'], 8: ['A', '3 classes · all absent'],
+      9: ['P', '4 classes · all present'], 12: ['M', 'Today · 5 classes · 2 marked, 3 to go']
+    };
+    const perDay = [5, 4, 4, 3, 4, 0, 0];
+    const cells = [];
+    const blank = () => ({ blank: true, real: false, d: '', st: 'N', cls: 'cell', aria: '', selected: false, pick: () => {}, style: '' });
+    for (let i = 0; i < 3; i++) cells.push({ ...blank(), cls: 'cell blank' });
+    for (let d = 1; d <= 31; d++) {
+      const w = (d + 2) % 7;
+      const weekend = w >= 5;
+      const st = past[d] ? past[d][0] : 'N';
+      const info = past[d] ? past[d][1] : weekend ? 'No classes' : d > 12 ? 'Upcoming · ' + perDay[w] + ' classes' : 'No classes logged';
+      const sel = this.state.sel === d;
+      const cls = ['cell', weekend ? 'off' : '', d === 12 ? 'today' : '', sel ? 'sel' : ''].join(' ');
+      cells.push({
+        blank: false, real: true, d, st: d === 12 ? 'M' : st, cls, selected: sel,
+        aria: wd[w] + ' ' + d + ' October, ' + info,
+        pick: () => this.setState({ sel: d }), info, weekday: wd[w]
+      });
+    }
+    cells.push({ ...blank(), cls: 'cell blank' });
+    const s = cells.find((c) => c.real && c.d === this.state.sel);
+    return {
+      themeClass: (this.props.theme ?? 'Light') === 'Dark' ? 'dark' : '',
+      cells,
+      selTitle: s.weekday + ', ' + s.d + ' October',
+      selInfo: s.info,
+      goToday: () => this.setState({ sel: 12 })
+    };
+  }
+}
+</script>
+</body>
+</html>

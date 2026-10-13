@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Notifications</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+.app{--bg:#F6F7FB;--sf:#FFFFFF;--sr:#ECEEF5;--t1:#171923;--t2:#52586A;--sep:#D9DDE8;--ac:#4144D8;--onac:#FFFFFF;--acs:#EEEEFF;--ok:#176640;--oks:#E8F5ED;--bad:#B42338;--bads:#FDECEF;--warn:#805800;--warns:#FFF4D8;--neu:#535D73;--neus:#EEF0F5;position:relative;overflow:hidden;box-sizing:border-box;background:var(--bg);color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+.app.dark{--bg:#101116;--sf:#1B1D26;--sr:#272A36;--t1:#F5F6FC;--t2:#B3B8CB;--sep:#383D4D;--ac:#B2B4FF;--onac:#18194A;--acs:#292B4E;--ok:#7ED6A3;--oks:#173728;--bad:#FF9CA9;--bads:#45222B;--warn:#F1CA72;--warns:#3D321D;--neu:#B6BFD5;--neus:#292F3C}
+.app *{box-sizing:border-box}
+.app button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--ac);text-decoration:none}a:hover{color:var(--ac)}
+.cap{font-size:13px;line-height:18px;font-weight:500;color:var(--t2)}
+.ico{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.grp{background:var(--sf);border-radius:16px;overflow:hidden}
+.item{padding:14px 16px;display:flex;flex-direction:column;gap:12px;border-top:.5px solid var(--sep)}
+.item:first-child{border-top:0}
+.head{display:flex;align-items:center;gap:12px}
+.head .t{flex:1;min-width:0}
+.head .t b{display:block;font-size:16px;font-weight:600}
+.sw{width:51px;height:31px;border-radius:16px;border:0;background:var(--sr);position:relative;padding:0;flex:none;transition:background .18s;box-shadow:inset 0 0 0 1px var(--sep)}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.22);transition:left .18s}
+.sw.on{background:var(--ok);box-shadow:none}
+.sw.on::after{left:22px}
+.chip{height:36px;padding:0 14px;border-radius:18px;border:1px solid var(--sep);background:var(--sf);font-size:14px;font-weight:600;white-space:nowrap}
+.chip.on{background:var(--acs);border-color:var(--ac);color:var(--ac)}
+.nb{flex:1;height:40px;border:0;border-radius:10px;background:rgba(120,124,140,.16);font-size:14px;font-weight:600}
+</style>
+</helmet>
+<div class="app {{themeClass}}" style="width: 390px; height: 1180px">
+  <nav style="padding: 54px 12px 0 4px; height: 102px; display: flex; align-items: center">
+    <a href="Settings.dc.html" style="display: flex; align-items: center; gap: 2px; height: 44px; padding: 0 8px; font-size: 17px">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>Settings
+    </a>
+  </nav>
+  <main style="padding: 0 16px 40px; display: flex; flex-direction: column; gap: 16px">
+    <h1 style="margin: 0 4px; font-size: 30px; line-height: 36px; font-weight: 700; letter-spacing: -0.3px">Notifications</h1>
+
+    <section class="grp"><div class="item"><div class="head"><span class="t" id="all"><b>Allow notifications</b><span class="cap">Everything below needs this on</span></span><button class="{{allCls}}" role="switch" aria-checked="{{all}}" aria-labelledby="all" onClick="{{tAll}}"></button></div></div></section>
+
+    <section class="grp" style="opacity: {{dim}}">
+      <div class="item">
+        <div class="head"><span class="t" id="rem"><b>Class reminders</b><span class="cap">Before each class, with the room</span></span><button class="{{remCls}}" role="switch" aria-checked="{{rem}}" aria-labelledby="rem" onClick="{{tRem}}"></button></div>
+        <div role="radiogroup" aria-label="Remind me before" style="display: flex; gap: 8px">
+          <sc-for list="{{leads}}" as="l" hint-placeholder-count="4"><button class="{{l.cls}}" role="radio" aria-checked="{{l.on}}" onClick="{{l.pick}}">{{l.label}}</button></sc-for>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="head"><span class="t" id="ask"><b>Ask after class</b><span class="cap">Mark attendance right from the notification</span></span><button class="{{askCls}}" role="switch" aria-checked="{{ask}}" aria-labelledby="ask" onClick="{{tAsk}}"></button></div>
+        <figure aria-label="Preview of the after-class notification" style="margin: 0; border-radius: 22px; padding: 12px; background: var(--sr); display: flex; flex-direction: column; gap: 10px">
+          <div style="display: flex; gap: 10px; align-items: flex-start">
+            <span aria-hidden="true" style="width: 36px; height: 36px; border-radius: 9px; background: var(--ac); color: var(--onac); display: flex; align-items: center; justify-content: center; flex: none"><svg class="ico" viewBox="0 0 24 24" style="width: 20px; height: 20px"><rect x="3" y="4.5" width="18" height="16.5" rx="2.5"></rect><path d="M3 9.5h18M9 15l2 2 4-4"></path></svg></span>
+            <div style="flex: 1">
+              <div style="display: flex; justify-content: space-between"><b style="font-size: 15px">Operating Systems just ended</b><span class="cap">now</span></div>
+              <div style="font-size: 14px; line-height: 19px">10:00–10:55 · LH-204. Were you there? You’re at 70.0%.</div>
+            </div>
+          </div>
+          <sc-if value="{{notMarked}}" hint-placeholder-val="{{true}}">
+            <div style="display: flex; gap: 6px">
+              <button class="nb" onClick="{{mP}}" style="color: var(--ok)">Present</button>
+              <button class="nb" onClick="{{mA}}" style="color: var(--bad)">Absent</button>
+              <button class="nb" onClick="{{mN}}">Neutral</button>
+            </div>
+          </sc-if>
+          <sc-if value="{{marked}}" hint-placeholder-val="{{false}}">
+            <div role="status" style="display: flex; align-items: center; justify-content: space-between; height: 40px; padding: 0 4px; font-size: 14px; font-weight: 600">{{markedText}}<button onClick="{{unmark}}" style="border: 0; background: none; color: var(--ac); font-weight: 700; height: 40px">Undo</button></div>
+          </sc-if>
+        </figure>
+      </div>
+
+      <div class="item">
+        <div class="head"><span class="t" id="low"><b>Low attendance alerts</b><span class="cap">When a subject gets close to your target</span></span><button class="{{lowCls}}" role="switch" aria-checked="{{low}}" aria-labelledby="low" onClick="{{tLow}}"></button></div>
+        <div role="radiogroup" aria-label="Alert when" style="display: flex; gap: 8px; flex-wrap: wrap">
+          <sc-for list="{{margins}}" as="m" hint-placeholder-count="3"><button class="{{m.cls}}" role="radio" aria-checked="{{m.on}}" onClick="{{m.pick}}">{{m.label}}</button></sc-for>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="head"><span class="t" id="sum"><b>Daily summary</b><span class="cap">20:00 · unmarked classes and today’s totals</span></span><button class="{{sumCls}}" role="switch" aria-checked="{{sum}}" aria-labelledby="sum" onClick="{{tSum}}"></button></div>
+      </div>
+      <div class="item">
+        <div class="head"><span class="t" id="exm"><b>Exams &amp; deadlines</b><span class="cap">1 day and 1 hour before</span></span><button class="{{exmCls}}" role="switch" aria-checked="{{exm}}" aria-labelledby="exm" onClick="{{tExm}}"></button></div>
+      </div>
+      <div class="item">
+        <div class="head"><span class="t" id="wkr"><b>Weekly report</b><span class="cap">Sunday evening, per subject</span></span><button class="{{wkrCls}}" role="switch" aria-checked="{{wkr}}" aria-labelledby="wkr" onClick="{{tWkr}}"></button></div>
+      </div>
+    </section>
+    <div class="cap" style="padding: 0 8px">Notifications are scheduled on your iPhone from your timetable. No server is involved.</div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["Light","Dark"],"default":"Light"},"$preview":{"width":390,"height":1180}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = { all: true, rem: true, ask: true, low: true, sum: false, exm: true, wkr: false, lead: 10, margin: 3, mark: null };
+  }
+  renderVals() {
+    const s = this.state;
+    const out = { themeClass: (this.props.theme ?? 'Light') === 'Dark' ? 'dark' : '', dim: s.all ? '1' : '0.45' };
+    const Cap = (k) => k.charAt(0).toUpperCase() + k.slice(1);
+    ['all', 'rem', 'ask', 'low', 'sum', 'exm', 'wkr'].forEach((k) => {
+      out[k] = s[k];
+      out[k + 'Cls'] = s[k] ? 'sw on' : 'sw';
+      out['t' + Cap(k)] = () => this.setState({ [k]: !s[k] });
+    });
+    out.leads = [5, 10, 15, 30].map((m) => ({ label: m + ' min', on: s.lead === m, cls: s.lead === m ? 'chip on' : 'chip', pick: () => this.setState({ lead: m }) }));
+    out.margins = [[2, 'Within 2%'], [3, 'Within 3%'], [0, 'Only below target']].map(([v, label]) => ({ label, on: s.margin === v, cls: s.margin === v ? 'chip on' : 'chip', pick: () => this.setState({ margin: v }) }));
+    out.notMarked = !s.mark; out.marked = !!s.mark;
+    out.markedText = s.mark === 'p' ? 'Marked present · now 71.4%' : s.mark === 'a' ? 'Marked absent · now 66.7%' : 'Marked neutral · not counted';
+    out.mP = () => this.setState({ mark: 'p' }); out.mA = () => this.setState({ mark: 'a' }); out.mN = () => this.setState({ mark: 'n' });
+    out.unmark = () => this.setState({ mark: null });
+    return out;
+  }
+}
+</script>
+</body>
+</html>

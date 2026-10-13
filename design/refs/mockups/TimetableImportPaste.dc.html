@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Review timetable import</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+.app{--bg:#F6F7FB;--sf:#FFFFFF;--sr:#ECEEF5;--t1:#171923;--t2:#52586A;--sep:#D9DDE8;--ac:#4144D8;--onac:#FFFFFF;--acs:#EEEEFF;--ok:#176640;--oks:#E8F5ED;--bad:#B42338;--bads:#FDECEF;--warn:#805800;--warns:#FFF4D8;--neu:#535D73;--neus:#EEF0F5;--code:#F0F1F7;position:relative;overflow:hidden;box-sizing:border-box;background:var(--bg);color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+.app.dark{--bg:#101116;--sf:#1B1D26;--sr:#272A36;--t1:#F5F6FC;--t2:#B3B8CB;--sep:#383D4D;--ac:#B2B4FF;--onac:#18194A;--acs:#292B4E;--ok:#7ED6A3;--oks:#173728;--bad:#FF9CA9;--bads:#45222B;--warn:#F1CA72;--warns:#3D321D;--neu:#B6BFD5;--neus:#292F3C;--code:#14151C}
+.app *{box-sizing:border-box}
+.app button,.app textarea{font:inherit;color:inherit}
+.app button{cursor:pointer}
+.app button:disabled{cursor:default}
+a{color:var(--ac);text-decoration:none}a:hover{color:var(--ac)}
+.cap{font-size:13px;line-height:18px;font-weight:500;color:var(--t2)}
+.ico{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.gh{font-size:13px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.4px;margin:6px 4px -6px}
+.grp{background:var(--sf);border-radius:16px;overflow:hidden}
+.r{display:flex;align-items:center;gap:10px;min-height:48px;padding:8px 14px;border-top:.5px solid var(--sep);font-size:15px}
+.r:first-child{border-top:0}
+.tag{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:7px;font-size:12px;font-weight:700;white-space:nowrap}
+.sm{height:36px;padding:0 14px;border-radius:18px;border:1px solid var(--sep);background:var(--sf);font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.opt{width:100%;text-align:left;border:1.5px solid var(--sep);background:var(--sf);border-radius:14px;padding:12px 14px;display:flex;gap:12px;align-items:flex-start;min-height:44px}
+.opt.on{border-color:var(--ac);background:var(--acs)}
+.dot{width:22px;height:22px;border-radius:11px;border:2px solid var(--t2);flex:none;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.opt.on .dot{border-color:var(--ac)}
+.opt.on .dot::after{content:"";width:12px;height:12px;border-radius:6px;background:var(--ac)}
+.btn{height:52px;border-radius:14px;border:0;font-size:17px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px;width:100%}
+.btn.pri{background:var(--ac);color:var(--onac)}
+.btn:disabled{background:var(--sr);color:var(--t2)}
+.seg{display:flex;background:var(--sr);border-radius:12px;padding:3px}
+.seg button{flex:1;height:38px;border:0;background:none;border-radius:9px;font-size:14px;font-weight:600;color:var(--t2)}
+.seg button.on{background:var(--sf);color:var(--t1);box-shadow:0 1px 3px rgba(20,22,40,.14)}
+</style>
+</helmet>
+<div class="app {{themeClass}}" style="width: 390px; height: 1500px">
+  <nav style="padding: 54px 12px 0 4px; height: 102px; display: flex; align-items: center">
+    <a href="TimetableImport.dc.html" style="display: flex; align-items: center; gap: 2px; height: 44px; padding: 0 8px; font-size: 17px">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>Import
+    </a>
+  </nav>
+
+  <main style="padding: 0 16px 40px; display: flex; flex-direction: column; gap: 16px">
+    <h1 style="margin: 0 4px; font-size: 30px; line-height: 36px; font-weight: 700; letter-spacing: -0.3px">Review import</h1>
+
+    <label style="display: flex; flex-direction: column; gap: 8px">
+      <span class="gh" style="margin: 0 4px">Chatbot reply</span>
+      <textarea spellcheck="false" defaultValue="{{json}}" style="height: 168px; resize: none; border-radius: 16px; border: 1.5px solid var(--ok); background: var(--code); padding: 12px 14px; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; line-height: 18px; outline: none"></textarea>
+    </label>
+    <div style="display: flex; gap: 8px">
+      <button class="sm"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 16px; height: 16px"><rect x="7" y="4" width="10" height="4" rx="1"></rect><path d="M7 6H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-1"></path></svg>Paste again</button>
+      <button class="sm">Clear</button>
+    </div>
+
+    <div role="status" style="display: flex; gap: 10px; align-items: center; padding: 12px 14px; border-radius: 14px; background: var(--oks); color: var(--ok); font-size: 15px; font-weight: 600">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+      Read 7 subjects and 21 weekly classes
+    </div>
+
+    <sc-if value="{{unresolved}}" hint-placeholder-val="{{true}}">
+      <section aria-label="Overlap to resolve" style="border-radius: 16px; background: var(--sf); box-shadow: inset 0 0 0 1.5px var(--bad); padding: 14px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; gap: 10px; color: var(--bad); font-size: 16px; font-weight: 700; align-items: center">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8v5M12 16.5h.01M10.3 3.9L2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path></svg>
+          1 overlap to fix · Thursday
+        </div>
+        <div style="font-size: 15px; line-height: 21px; color: var(--t2)">Digital Logic Lab (14:00–16:45, ECE Lab 2) overlaps Technical Writing (15:00–15:55, Seminar Rm 3). The photo may have been misread.</div>
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <button class="sm" onClick="{{keepLab}}" style="height: 44px; justify-content: center">Keep Digital Logic Lab</button>
+          <button class="sm" onClick="{{keepTw}}" style="height: 44px; justify-content: center">Keep Technical Writing</button>
+          <a href="TimetableSlot.dc.html" class="sm" style="height: 44px; justify-content: center">Edit times</a>
+        </div>
+      </section>
+    </sc-if>
+    <sc-if value="{{resolved}}" hint-placeholder-val="{{false}}">
+      <div style="display: flex; gap: 10px; align-items: center; padding: 12px 14px; border-radius: 14px; background: var(--sf); font-size: 15px">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="color: var(--ok)"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+        <span style="flex: 1">Kept {{kept}} on Thursday</span>
+        <button onClick="{{undo}}" style="border: 0; background: none; color: var(--ac); font-weight: 600; height: 44px">Undo</button>
+      </div>
+    </sc-if>
+
+    <div class="gh">Subjects</div>
+    <div class="grp">
+      <sc-for list="{{subjects}}" as="s" hint-placeholder-count="7">
+        <div class="r">
+          <span style="flex: 1; min-width: 0">{{s.name}}</span>
+          <span class="cap">{{s.n}}/wk</span>
+          <span class="tag" style="background: {{s.bg}}; color: {{s.fg}}">{{s.tag}}</span>
+        </div>
+      </sc-for>
+    </div>
+
+    <div class="gh">Week</div>
+    <div class="grp" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); padding: 12px 6px; text-align: center">
+      <sc-for list="{{week}}" as="w" hint-placeholder-count="5">
+        <div><div class="cap" style="font-weight: 700">{{w.d}}</div><div style="font-size: 20px; font-weight: 700; color: {{w.color}}">{{w.n}}</div></div>
+      </sc-for>
+    </div>
+
+    <div class="gh">How to apply</div>
+    <div role="radiogroup" aria-label="How to apply" style="display: flex; flex-direction: column; gap: 8px">
+      <button class="{{replaceCls}}" role="radio" aria-checked="{{isReplace}}" onClick="{{pickReplace}}"><span class="dot"></span><span><span style="display: block; font-size: 16px; font-weight: 600">Replace current timetable</span><span class="cap">Weekly classes are swapped. Subjects, files and past attendance stay.</span></span></button>
+      <button class="{{mergeCls}}" role="radio" aria-checked="{{isMerge}}" onClick="{{pickMerge}}"><span class="dot"></span><span><span style="display: block; font-size: 16px; font-weight: 600">Merge with current</span><span class="cap">Adds new classes. Exact duplicates are skipped.</span></span></button>
+    </div>
+    <div class="seg" role="radiogroup" aria-label="Starting">
+      <button class="{{todayCls}}" role="radio" aria-checked="{{isToday}}" onClick="{{pickToday}}">From today</button>
+      <button class="{{wholeCls}}" role="radio" aria-checked="{{isWhole}}" onClick="{{pickWhole}}">Whole semester</button>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 4px">
+      <button class="btn pri" disabled="{{unresolved}}">{{cta}}</button>
+      <div class="cap" style="text-align: center">{{ctaNote}}</div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["Light","Dark"],"default":"Light"},"$preview":{"width":390,"height":1500}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = { keep: null, mode: 'replace', scope: 'today' };
+  }
+  renderVals() {
+    const s = this.state;
+    const json = JSON.stringify({
+      formatVersion: 1,
+      subjects: [
+        { name: 'Data Structures & Algorithms', code: 'CS201', teacher: null },
+        { name: 'Operating Systems', code: 'CS204', teacher: null },
+        { name: 'Data Structures Lab', code: 'CS291', teacher: null }
+      ],
+      slots: [
+        { subject: 'Data Structures & Algorithms', day: 'Monday', start: '09:00', end: '09:55', classType: 'Lecture', weekPattern: 'every', venue: 'LH-204', teacher: null, countsAs: 1 },
+        { subject: 'Operating Systems', day: 'Monday', start: '10:00', end: '10:55', classType: 'Lecture', weekPattern: 'every', venue: 'LH-204', teacher: null, countsAs: 1 }
+      ]
+    }, null, 2);
+    const ex = ['var(--neus)', 'var(--neu)', 'Matches'];
+    const nw = ['var(--acs)', 'var(--ac)', 'New'];
+    const twN = s.keep === 'lab' ? 2 : 3;
+    const dlN = s.keep === 'tw' ? 1 : 2;
+    const rows = [['Data Structures & Algorithms', 3, ex], ['Operating Systems', 4, ex], ['Discrete Mathematics', 4, ex], ['Digital Logic Lab', dlN, ex], ['Economics for Engineers', 4, ex], ['Technical Writing', twN, ex], ['Data Structures Lab', 1, nw]];
+    const total = rows.reduce((a, r) => a + r[1], 0);
+    const unresolved = !s.keep;
+    return {
+      themeClass: (this.props.theme ?? 'Light') === 'Dark' ? 'dark' : '',
+      json, unresolved, resolved: !unresolved,
+      kept: s.keep === 'lab' ? 'Digital Logic Lab' : 'Technical Writing',
+      keepLab: () => this.setState({ keep: 'lab' }), keepTw: () => this.setState({ keep: 'tw' }), undo: () => this.setState({ keep: null }),
+      subjects: rows.map(([name, n, st]) => ({ name, n, bg: st[0], fg: st[1], tag: st[2] })),
+      week: [['Mon', 5], ['Tue', 4], ['Wed', 4], ['Thu', unresolved ? 4 : 3], ['Fri', 4]].map(([d, n]) => ({ d, n, color: d === 'Thu' && unresolved ? 'var(--bad)' : 'var(--t1)' })),
+      isReplace: s.mode === 'replace', isMerge: s.mode === 'merge',
+      replaceCls: s.mode === 'replace' ? 'opt on' : 'opt', mergeCls: s.mode === 'merge' ? 'opt on' : 'opt',
+      pickReplace: () => this.setState({ mode: 'replace' }), pickMerge: () => this.setState({ mode: 'merge' }),
+      isToday: s.scope === 'today', isWhole: s.scope === 'whole',
+      todayCls: s.scope === 'today' ? 'on' : '', wholeCls: s.scope === 'whole' ? 'on' : '',
+      pickToday: () => this.setState({ scope: 'today' }), pickWhole: () => this.setState({ scope: 'whole' }),
+      cta: unresolved ? 'Fix the overlap to continue' : 'Import ' + total + ' classes',
+      ctaNote: unresolved ? 'Nothing is saved until you confirm.' : (s.mode === 'replace' ? 'Replaces' : 'Merges into') + ' your timetable ' + (s.scope === 'today' ? 'from Mon 12 Oct' : 'for all of Fall 2026') + '.'
+    };
+  }
+}
+</script>
+</body>
+</html>

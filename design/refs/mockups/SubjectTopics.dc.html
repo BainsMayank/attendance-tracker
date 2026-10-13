@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Subject topics</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+.app{--bg:#F6F7FB;--sf:#FFFFFF;--sr:#ECEEF5;--t1:#171923;--t2:#52586A;--sep:#D9DDE8;--ac:#4144D8;--onac:#FFFFFF;--acs:#EEEEFF;--ok:#176640;--oks:#E8F5ED;--bad:#B42338;--bads:#FDECEF;--warn:#805800;--warns:#FFF4D8;--neu:#535D73;--neus:#EEF0F5;--bar:rgba(255,255,255,.86);position:relative;overflow:hidden;box-sizing:border-box;background:var(--bg);color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+.app.dark{--bg:#101116;--sf:#1B1D26;--sr:#272A36;--t1:#F5F6FC;--t2:#B3B8CB;--sep:#383D4D;--ac:#B2B4FF;--onac:#18194A;--acs:#292B4E;--ok:#7ED6A3;--oks:#173728;--bad:#FF9CA9;--bads:#45222B;--warn:#F1CA72;--warns:#3D321D;--neu:#B6BFD5;--neus:#292F3C;--bar:rgba(27,29,38,.88)}
+.app *{box-sizing:border-box}
+.app button,.app input{font:inherit;color:inherit}
+.app button{cursor:pointer}
+a{color:var(--ac);text-decoration:none}a:hover{color:var(--ac)}
+.card{background:var(--sf);border-radius:16px}
+.cap{font-size:13px;line-height:18px;font-weight:500;color:var(--t2)}
+.ico{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ib{width:44px;height:44px;border-radius:22px;border:0;background:var(--sf);color:var(--ac);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 .5px var(--sep)}
+.pill{display:inline-flex;align-items:center;gap:4px;min-height:24px;padding:2px 10px;border-radius:12px;font-size:13px;font-weight:600;line-height:18px;white-space:nowrap}
+.pill.ok{background:var(--oks);color:var(--ok)}.pill.bad{background:var(--bads);color:var(--bad)}.pill.warn{background:var(--warns);color:var(--warn)}.pill.neu{background:var(--neus);color:var(--neu)}
+.chip{height:36px;padding:0 14px;border-radius:18px;border:1px solid var(--sep);background:var(--sf);font-size:14px;font-weight:600;white-space:nowrap}
+.chip.on{background:var(--t1);color:var(--bg) !important;border-color:var(--t1)}
+.stat{display:flex;flex-direction:column;align-items:center;gap:1px}
+.stat b{font-size:17px;line-height:22px;font-weight:600}
+.stat span{font-size:12px;line-height:16px;color:var(--t2);font-weight:500}
+.seg{display:flex;background:var(--sr);border-radius:12px;padding:3px}
+.seg a{flex:1;height:38px;display:flex;align-items:center;justify-content:center;gap:6px;border-radius:9px;font-size:14px;font-weight:600;color:var(--t2)}
+.seg a.on{background:var(--sf);color:var(--t1);box-shadow:0 1px 3px rgba(20,22,40,.14)}
+.uh{width:100%;display:flex;align-items:center;gap:10px;padding:12px 12px 12px 16px;border:0;background:none;min-height:64px;text-align:left}
+.trow{display:flex;align-items:center;gap:4px;min-height:48px;padding:0 6px 0 8px;border-top:.5px solid var(--sep);font-size:16px}
+.ck{width:44px;height:44px;border:0;background:none;display:flex;align-items:center;justify-content:center;flex:none}
+.ck .box{width:24px;height:24px;border-radius:7px;border:2px solid var(--t2);display:flex;align-items:center;justify-content:center;color:var(--onac)}
+.ck .box svg{opacity:0}
+.ck.on .box{background:var(--ac);border-color:var(--ac)}
+.ck.on .box svg{opacity:1}
+.star{width:44px;height:44px;border:0;background:none;color:var(--t2);display:flex;align-items:center;justify-content:center;flex:none}
+.star.on{color:var(--warn)}
+.star.on svg{fill:currentColor}
+.tabbar{position:absolute;left:16px;right:16px;bottom:24px;height:64px;border-radius:32px;background:var(--bar);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 8px 28px rgba(20,22,40,.14),0 0 0 .5px var(--sep);display:flex;padding:6px;z-index:5}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:26px;font-size:11px;font-weight:600;color:var(--t2) !important}
+.tab.on{background:var(--acs);color:var(--ac) !important}
+</style>
+</helmet>
+<div class="app {{themeClass}}" style="width: 390px; height: 1480px">
+  <nav aria-label="Subject navigation" style="padding: 54px 12px 0 4px; height: 102px; display: flex; align-items: center; justify-content: space-between">
+    <a href="Main.dc.html" style="display: flex; align-items: center; gap: 2px; height: 44px; padding: 0 8px; font-size: 17px">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>Subjects
+    </a>
+    <button class="ib" aria-label="Edit subject"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 20px; height: 20px"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"></path><path d="M13.5 6.5l4 4"></path></svg></button>
+  </nav>
+
+  <main style="padding: 0 16px 120px; display: flex; flex-direction: column; gap: 16px">
+    <div>
+      <div class="cap">CS201 · Lecture + Lab · 4 classes a week</div>
+      <h1 style="margin: 4px 0 0; font-size: 28px; line-height: 34px; font-weight: 700; letter-spacing: -0.3px">Data Structures &amp; Algorithms</h1>
+    </div>
+
+    <section class="card" aria-label="Attendance" style="border-radius: 24px; padding: 20px; display: flex; flex-direction: column; gap: 18px">
+      <div style="display: flex; align-items: center; gap: 18px">
+        <div style="position: relative; width: 104px; height: 104px; flex: none">
+          <svg width="104" height="104" viewBox="0 0 104 104" aria-hidden="true">
+            <circle cx="52" cy="52" r="45" fill="none" stroke-width="10" style="stroke: var(--sr)"></circle>
+            <circle cx="52" cy="52" r="45" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="231.36 282.74" transform="rotate(-90 52 52)" style="stroke: var(--ok)"></circle>
+            <line x1="1" y1="52" x2="13" y2="52" stroke-width="2.5" stroke-linecap="round" style="stroke: var(--t1)"></line>
+          </svg>
+          <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center">
+            <span style="font-size: 24px; line-height: 28px; font-weight: 700">81.8%</span>
+            <span class="cap" style="font-size: 12px">of 75%</span>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <span class="pill ok" style="align-self: flex-start">Safe</span>
+          <div style="font-size: 16px; line-height: 22px">You can skip <b>2 more classes</b> and stay at 75% or above.</div>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; background: var(--bg); border-radius: 12px; padding: 10px 4px">
+        <div class="stat"><b>18</b><span>Attended</span></div>
+        <div class="stat"><b>4</b><span>Missed</span></div>
+        <div class="stat"><b>1</b><span>Neutral</span></div>
+        <div class="stat"><b>22</b><span>Counted</span></div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+        <div style="border-radius: 12px; padding: 10px 12px; background: var(--oks); color: var(--ok)">
+          <div style="font-size: 12px; font-weight: 600">Attend next class</div>
+          <div style="font-size: 17px; font-weight: 700">82.6%</div>
+        </div>
+        <div style="border-radius: 12px; padding: 10px 12px; background: var(--bads); color: var(--bad)">
+          <div style="font-size: 12px; font-weight: 600">Skip next class</div>
+          <div style="font-size: 17px; font-weight: 700">78.3%</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="seg" role="tablist" aria-label="Subject sections">
+      <a class="on" href="SubjectTopics.dc.html" role="tab" aria-selected="true">Topics</a>
+      <a href="SubjectFiles.dc.html" role="tab" aria-selected="false">Files</a>
+      <a href="SubjectStudy.dc.html" role="tab" aria-selected="false">Study</a>
+    </div>
+
+    <section class="card" aria-label="Topic progress" style="padding: 16px; display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline">
+        <div style="font-size: 17px; font-weight: 600">{{done}} of {{total}} topics done</div>
+        <div style="font-size: 15px; font-weight: 600; color: var(--ac)">{{pct}}%</div>
+      </div>
+      <div style="height: 8px; border-radius: 4px; background: var(--sr)"><div style="height: 8px; border-radius: 4px; background: var(--ac); width: {{pct}}%"></div></div>
+      <div class="cap">{{impLeft}} important topics left before the mid-semester exam on 26 Oct</div>
+    </section>
+
+    <div style="display: flex; gap: 8px; align-items: center">
+      <sc-for list="{{chips}}" as="c" hint-placeholder-count="3">
+        <button class="{{c.cls}}" aria-pressed="{{c.on}}" onClick="{{c.pick}}">{{c.label}}</button>
+      </sc-for>
+      <button class="ib" aria-label="Add unit" style="margin-left: auto; width: 36px; height: 36px"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px"><path d="M12 5v14M5 12h14"></path></svg></button>
+    </div>
+
+    <sc-for list="{{units}}" as="u" hint-placeholder-count="4">
+      <section class="card" style="overflow: hidden">
+        <button class="uh" aria-expanded="{{u.open}}" onClick="{{u.toggle}}">
+          <div style="flex: 1; min-width: 0">
+            <div class="cap">Unit {{u.n}}</div>
+            <div style="font-size: 17px; line-height: 22px; font-weight: 600">{{u.title}}</div>
+          </div>
+          <span class="pill {{u.tone}}">{{u.done}}/{{u.total}}</span>
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px; color: var(--t2); transform: {{u.rot}}"><path d="M9 5l7 7-7 7"></path></svg>
+        </button>
+        <sc-if value="{{u.open}}" hint-placeholder-val="{{false}}">
+          <sc-for list="{{u.topics}}" as="tp" hint-placeholder-count="4">
+            <div class="trow">
+              <button class="{{tp.ckCls}}" role="checkbox" aria-checked="{{tp.done}}" aria-label="{{tp.name}}" onClick="{{tp.toggle}}"><span class="box"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 16px; height: 16px; stroke-width: 3"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></button>
+              <span style="flex: 1; min-width: 0; color: {{tp.color}}; text-decoration: {{tp.deco}}">{{tp.name}}</span>
+              <button class="{{tp.starCls}}" aria-label="Important" aria-pressed="{{tp.imp}}" onClick="{{tp.toggleImp}}"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 20px; height: 20px"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"></path></svg></button>
+            </div>
+          </sc-for>
+          <div class="trow" style="padding-left: 18px; gap: 10px; color: var(--ac)">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 20px; height: 20px"><path d="M12 5v14M5 12h14"></path></svg>
+            <label style="flex: 1; display: flex">
+              <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">New topic in {{u.title}}</span>
+              <input placeholder="Add a topic" style="flex: 1; border: 0; background: none; height: 44px; font-size: 16px; outline: none">
+            </label>
+          </div>
+        </sc-if>
+      </section>
+    </sc-for>
+  </main>
+
+  <nav class="tabbar" aria-label="Tabs">
+    <a class="tab on" href="Main.dc.html" aria-current="page"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h14v14H6a2 2 0 0 0-2 2zm0 0a2 2 0 0 0 2 2h14"></path></svg>Subjects</a>
+    <a class="tab" href="DailyLog.dc.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="2.5"></rect><path d="M3 9.5h18M8 2.5v4M16 2.5v4M9 15l2 2 4-4"></path></svg>Daily Log</a>
+    <a class="tab" href="Timetable.dc.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2.5"></rect><path d="M3 9h18M9 3v18"></path></svg>Timetable</a>
+    <a class="tab" href="Settings.dc.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path></svg>Settings</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["Light","Dark"],"default":"Light"},"$preview":{"width":390,"height":1480}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    const t = (name, done, imp) => ({ name, done: !!done, imp: !!imp });
+    this.state = {
+      filter: 'all',
+      open: { 1: false, 2: false, 3: true, 4: false },
+      units: [
+        { n: 1, title: 'Arrays & Linked Lists', topics: [t('Array operations & complexity', 1), t('Singly linked lists', 1), t('Doubly & circular lists', 1), t('Two-pointer techniques', 1, 1), t('Sparse matrices', 1)] },
+        { n: 2, title: 'Stacks & Queues', topics: [t('Stacks with arrays and lists', 1), t('Infix to postfix conversion', 1, 1), t('Circular queues', 1), t('Deques', 1)] },
+        { n: 3, title: 'Trees', topics: [t('Binary trees & traversals', 1, 1), t('Binary search trees', 1), t('Heaps & priority queues', 1), t('AVL tree rotations', 0, 1), t('B-trees and B+ trees', 0), t('Tries', 0, 1)] },
+        { n: 4, title: 'Graphs', topics: [t('BFS and DFS', 0, 1), t('Dijkstra’s shortest path', 0, 1), t('Minimum spanning trees', 0), t('Topological sort', 0), t('Union–find', 0)] }
+      ]
+    };
+  }
+  edit(ui, ti, key) {
+    this.setState((st) => ({
+      units: st.units.map((u, i) => (i !== ui ? u : { ...u, topics: u.topics.map((tp, j) => (j !== ti ? tp : { ...tp, [key]: !tp[key] })) }))
+    }));
+  }
+  renderVals() {
+    const f = this.state.filter;
+    let done = 0, total = 0, impLeft = 0;
+    const units = this.state.units.map((u, ui) => {
+      const d = u.topics.filter((x) => x.done).length;
+      done += d; total += u.topics.length;
+      impLeft += u.topics.filter((x) => x.imp && !x.done).length;
+      const open = f !== 'all' ? true : !!this.state.open[u.n];
+      const topics = u.topics
+        .map((tp, ti) => ({
+          ...tp,
+          ckCls: tp.done ? 'ck on' : 'ck',
+          starCls: tp.imp ? 'star on' : 'star',
+          color: tp.done ? 'var(--t2)' : 'var(--t1)',
+          deco: tp.done ? 'line-through' : 'none',
+          toggle: () => this.edit(ui, ti, 'done'),
+          toggleImp: () => this.edit(ui, ti, 'imp')
+        }))
+        .filter((tp) => (f === 'imp' ? tp.imp : f === 'todo' ? !tp.done : true));
+      return {
+        n: u.n, title: u.title, done: d, total: u.topics.length, topics, open,
+        tone: d === u.topics.length ? 'ok' : d === 0 ? 'neu' : 'warn',
+        rot: open ? 'rotate(90deg)' : 'none',
+        toggle: () => this.setState((st) => ({ filter: 'all', open: { ...st.open, [u.n]: !open } }))
+      };
+    }).filter((u) => u.topics.length > 0);
+    const defs = [['all', 'All'], ['imp', 'Important'], ['todo', 'Pending']];
+    const chips = defs.map(([k, label]) => ({ label, on: f === k, cls: f === k ? 'chip on' : 'chip', pick: () => this.setState({ filter: k }) }));
+    return {
+      themeClass: (this.props.theme ?? 'Light') === 'Dark' ? 'dark' : '',
+      done, total, impLeft, pct: Math.round((done / total) * 100), units, chips
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Subject study tools</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+.app{--bg:#F6F7FB;--sf:#FFFFFF;--sr:#ECEEF5;--t1:#171923;--t2:#52586A;--sep:#D9DDE8;--ac:#4144D8;--onac:#FFFFFF;--acs:#EEEEFF;--ok:#176640;--oks:#E8F5ED;--bad:#B42338;--bads:#FDECEF;--warn:#805800;--warns:#FFF4D8;--neu:#535D73;--neus:#EEF0F5;--bar:rgba(255,255,255,.86);position:relative;overflow:hidden;box-sizing:border-box;background:var(--bg);color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+.app.dark{--bg:#101116;--sf:#1B1D26;--sr:#272A36;--t1:#F5F6FC;--t2:#B3B8CB;--sep:#383D4D;--ac:#B2B4FF;--onac:#18194A;--acs:#292B4E;--ok:#7ED6A3;--oks:#173728;--bad:#FF9CA9;--bads:#45222B;--warn:#F1CA72;--warns:#3D321D;--neu:#B6BFD5;--neus:#292F3C;--bar:rgba(27,29,38,.88)}
+.app *{box-sizing:border-box}
+.app button,.app input{font:inherit;color:inherit}
+.app button{cursor:pointer}
+a{color:var(--ac);text-decoration:none}a:hover{color:var(--ac)}
+.card{background:var(--sf);border-radius:16px}
+.cap{font-size:13px;line-height:18px;font-weight:500;color:var(--t2)}
+.ico{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ib{width:44px;height:44px;border-radius:22px;border:0;background:var(--sf);color:var(--ac);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 .5px var(--sep)}
+.pill{display:inline-flex;align-items:center;gap:4px;min-height:24px;padding:2px 10px;border-radius:12px;font-size:13px;font-weight:600;line-height:18px;white-space:nowrap}
+.pill.ok{background:var(--oks);color:var(--ok)}.pill.bad{background:var(--bads);color:var(--bad)}.pill.warn{background:var(--warns);color:var(--warn)}.pill.ac{background:var(--acs);color:var(--ac)}
+.seg{display:flex;background:var(--sr);border-radius:12px;padding:3px}
+.seg a,.seg button{flex:1;height:38px;display:flex;align-items:center;justify-content:center;border:0;background:none;border-radius:9px;font-size:14px;font-weight:600;color:var(--t2)}
+.seg .on{background:var(--sf);color:var(--t1);box-shadow:0 1px 3px rgba(20,22,40,.14)}
+.sh{display:flex;align-items:center;justify-content:space-between;margin:6px 4px -4px}
+.sh h2{margin:0;font-size:20px;line-height:25px;font-weight:700}
+.sh a,.sh button{font-size:15px;font-weight:600;border:0;background:none;color:var(--ac);height:44px;display:flex;align-items:center}
+.row{display:flex;align-items:center;gap:12px;min-height:60px;padding:10px 14px;border-top:.5px solid var(--sep)}
+.row:first-child{border-top:0}
+.chip{height:36px;padding:0 14px;border-radius:18px;border:1px solid var(--sep);background:var(--sf);font-size:14px;font-weight:600;white-space:nowrap}
+.chip.on{background:var(--t1);color:var(--bg);border-color:var(--t1)}
+.btn{height:50px;border-radius:14px;border:0;font-size:17px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn.pri{background:var(--ac);color:var(--onac)}
+.btn.sec{background:var(--sr);color:var(--t1)}
+.lb{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;letter-spacing:.3px;flex:none}
+input[type=range]{width:100%;accent-color:var(--ac);height:32px;margin:0}
+.tabbar{position:absolute;left:16px;right:16px;bottom:24px;height:64px;border-radius:32px;background:var(--bar);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 8px 28px rgba(20,22,40,.14),0 0 0 .5px var(--sep);display:flex;padding:6px;z-index:5}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:26px;font-size:11px;font-weight:600;color:var(--t2) !important}
+.tab.on{background:var(--acs);color:var(--ac) !important}
+</style>
+</helmet>
+<div class="app {{themeClass}}" style="width: 390px; height: 1960px">
+  <nav aria-label="Subject navigation" style="padding: 54px 12px 0 4px; height: 102px; display: flex; align-items: center; justify-content: space-between">
+    <a href="Main.dc.html" style="display: flex; align-items: center; gap: 2px; height: 44px; padding: 0 8px; font-size: 17px">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>Subjects
+    </a>
+  </nav>
+
+  <main style="padding: 0 16px 120px; display: flex; flex-direction: column; gap: 16px">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px">
+      <div>
+        <div class="cap">CS201</div>
+        <h1 style="margin: 2px 0 0; font-size: 24px; line-height: 30px; font-weight: 700">Data Structures &amp; Algorithms</h1>
+      </div>
+      <span class="pill ok" style="margin-bottom: 4px">81.8%</span>
+    </div>
+
+    <div class="seg" role="tablist" aria-label="Subject sections">
+      <a href="SubjectTopics.dc.html" role="tab" aria-selected="false">Topics</a>
+      <a href="SubjectFiles.dc.html" role="tab" aria-selected="false">Files</a>
+      <a class="on" href="SubjectStudy.dc.html" role="tab" aria-selected="true">Study</a>
+    </div>
+
+    <div class="sh"><h2>Exams &amp; deadlines</h2><button>Add</button></div>
+    <section class="card" style="padding: 2px 0">
+      <div class="row">
+        <div style="width: 52px; flex: none; text-align: center; border-radius: 12px; background: var(--bads); color: var(--bad); padding: 6px 0">
+          <div style="font-size: 20px; font-weight: 700; line-height: 24px">14</div><div style="font-size: 11px; font-weight: 700">DAYS</div>
+        </div>
+        <div style="flex: 1">
+          <div style="font-size: 16px; font-weight: 600">Mid-semester exam</div>
+          <div class="cap">Mon 26 Oct, 10:00 · Exam Hall B · Units 1–3</div>
+        </div>
+      </div>
+      <div class="row">
+        <div style="width: 52px; flex: none; text-align: center; border-radius: 12px; background: var(--warns); color: var(--warn); padding: 6px 0">
+          <div style="font-size: 20px; font-weight: 700; line-height: 24px">4</div><div style="font-size: 11px; font-weight: 700">DAYS</div>
+        </div>
+        <div style="flex: 1">
+          <div style="font-size: 16px; font-weight: 600">Assignment 4 – Graphs</div>
+          <div class="cap">Due Fri 16 Oct, 23:59 · submit on the course portal</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="sh"><h2>Bunk planner</h2></div>
+    <section class="card" aria-label="Bunk planner" style="padding: 16px; display: flex; flex-direction: column; gap: 14px">
+      <div class="seg" role="radiogroup" aria-label="Scenario">
+        <button class="{{skipCls}}" role="radio" aria-checked="{{isSkip}}" onClick="{{setSkip}}">If I skip</button>
+        <button class="{{attCls}}" role="radio" aria-checked="{{isAtt}}" onClick="{{setAtt}}">If I attend</button>
+      </div>
+      <label style="display: flex; flex-direction: column; gap: 4px">
+        <span style="display: flex; justify-content: space-between; font-size: 16px; font-weight: 600"><span>Next classes</span><span style="color: var(--ac)">{{n}}</span></span>
+        <input type="range" min="0" max="8" step="1" value="{{n}}" onChange="{{onN}}" aria-valuetext="{{n}} classes">
+      </label>
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px; border-radius: 14px; background: {{resBg}}; color: {{resFg}}">
+        <div>
+          <div style="font-size: 13px; font-weight: 600">Attendance would be</div>
+          <div style="font-size: 30px; line-height: 36px; font-weight: 700">{{proj}}%</div>
+        </div>
+        <div style="text-align: right; font-size: 14px; font-weight: 600; max-width: 150px">{{verdict}}</div>
+      </div>
+      <div class="cap">{{whenLine}}</div>
+      <div style="display: flex; gap: 8px; align-items: center; font-size: 14px">
+        <button aria-label="One class fewer" onClick="{{dec}}" class="chip" style="width: 44px; padding: 0">−1</button>
+        <button aria-label="One class more" onClick="{{inc}}" class="chip" style="width: 44px; padding: 0">+1</button>
+        <span class="cap">Neutral (cancelled) classes don’t count.</span>
+      </div>
+    </section>
+
+    <div class="sh"><h2>Focus timer</h2></div>
+    <section class="card" aria-label="Focus timer" style="padding: 18px 16px 16px; display: flex; flex-direction: column; gap: 14px; align-items: center">
+      <div role="timer" aria-live="off" style="font-size: 56px; line-height: 64px; font-weight: 300; letter-spacing: -1px">{{clock}}</div>
+      <div role="radiogroup" aria-label="Session length" style="display: flex; gap: 8px">
+        <sc-for list="{{presets}}" as="p" hint-placeholder-count="3">
+          <button class="{{p.cls}}" role="radio" aria-checked="{{p.on}}" onClick="{{p.pick}}">{{p.label}}</button>
+        </sc-for>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; width: 100%">
+        <button class="btn sec" onClick="{{reset}}">Reset</button>
+        <button class="btn pri" onClick="{{toggle}}">{{runLabel}}</button>
+      </div>
+      <div class="cap">This week on DSA: 3 sessions · 1 h 15 min</div>
+    </section>
+
+    <div class="sh"><h2>Notes</h2><button>New note</button></div>
+    <section class="card" style="padding: 2px 0">
+      <div class="row" style="align-items: flex-start">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px; color: var(--warn); margin-top: 3px"><path d="M12 17v5M8 3h8l-1 6 3 3v2H6v-2l3-3z"></path></svg>
+        <div style="flex: 1">
+          <div style="font-size: 16px; font-weight: 600">Mid-sem pattern</div>
+          <div class="cap">5 questions, attempt any 4. Trees carry 40%. Practise AVL rotations by hand.</div>
+        </div>
+      </div>
+      <div class="row" style="align-items: flex-start">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px; color: var(--t2); margin-top: 3px"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path></svg>
+        <div style="flex: 1">
+          <div style="font-size: 16px; font-weight: 600">Heap sort dry run</div>
+          <div class="cap">Build-heap is O(n), not O(n log n). Edited 7 Oct</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="sh"><h2>Links</h2><button>Add link</button></div>
+    <section class="card" style="padding: 2px 0">
+      <a class="row" href="#" style="color: var(--t1)">
+        <span class="lb" style="background: var(--bads); color: var(--bad)">VIDEO</span>
+        <span style="flex: 1"><span style="display: block; font-size: 16px; font-weight: 600">Trees lecture playlist</span><span class="cap">YouTube · 12 videos</span></span>
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px; color: var(--t2)"><path d="M14 4h6v6M20 4l-9 9M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path></svg>
+      </a>
+      <a class="row" href="#" style="color: var(--t1)">
+        <span class="lb" style="background: var(--oks); color: var(--ok)">DRIVE</span>
+        <span style="flex: 1"><span style="display: block; font-size: 16px; font-weight: 600">Class shared folder</span><span class="cap">Google Drive</span></span>
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px; color: var(--t2)"><path d="M14 4h6v6M20 4l-9 9M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path></svg>
+      </a>
+      <a class="row" href="#" style="color: var(--t1)">
+        <span class="lb" style="background: var(--acs); color: var(--ac)">WEB</span>
+        <span style="flex: 1"><span style="display: block; font-size: 16px; font-weight: 600">Tree visualiser</span><span class="cap">Interactive animations</span></span>
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px; color: var(--t2)"><path d="M14 4h6v6M20 4l-9 9M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path></svg>
+      </a>
+    </section>
+
+    <div class="sh"><h2>When &amp; where</h2><a href="Timetable.dc.html">Edit</a></div>
+    <section class="card" style="padding: 2px 0">
+      <sc-for list="{{slots}}" as="s" hint-placeholder-count="4">
+        <div class="row" style="min-height: 52px">
+          <span style="width: 44px; font-size: 15px; font-weight: 700">{{s.day}}</span>
+          <span style="flex: 1; font-size: 15px">{{s.time}}</span>
+          <span class="cap">{{s.where}}</span>
+        </div>
+      </sc-for>
+    </section>
+  </main>
+
+  <nav class="tabbar" aria-label="Tabs">
+    <a class="tab on" href="Main.dc.html" aria-current="page"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h14v14H6a2 2 0 0 0-2 2zm0 0a2 2 0 0 0 2 2h14"></path></svg>Subjects</a>
+    <a class="tab" href="DailyLog.dc.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="2.5"></rect><path d="M3 9.5h18M8 2.5v4M16 2.5v4M9 15l2 2 4-4"></path></svg>Daily Log</a>
+    <a class="tab" href="Timetable.dc.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2.5"></rect><path d="M3 9h18M9 3v18"></path></svg>Timetable</a>
+    <a class="tab" href="Settings.dc.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path></svg>Settings</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["Light","Dark"],"default":"Light"},"$preview":{"width":390,"height":1960}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = { mode: 'skip', n: 2, len: 25, secs: 1500, running: false };
+  }
+  componentWillUnmount() { clearInterval(this.timer); }
+  toggleTimer() {
+    if (this.state.running) {
+      clearInterval(this.timer);
+      this.setState({ running: false });
+    } else {
+      clearInterval(this.timer);
+      this.timer = setInterval(() => {
+        this.setState((st) => (st.secs <= 1 ? { secs: 0, running: false } : { secs: st.secs - 1 }));
+        if (this.state.secs <= 0) clearInterval(this.timer);
+      }, 1000);
+      this.setState({ running: true });
+    }
+  }
+  renderVals() {
+    const a = 18, t = 22, T = 0.75;
+    const { mode, n } = this.state;
+    const skip = mode === 'skip';
+    const p = skip ? a / (t + n) : (a + n) / (t + n);
+    const ok = p >= T;
+    let verdict;
+    if (skip) {
+      const room = Math.floor(a / T - t + 1e-9);
+      verdict = ok ? (room - n === 0 ? 'Exactly at 75%. No more skips after this.' : 'Still above 75%. ' + (room - n) + ' more skip' + (room - n === 1 ? '' : 's') + ' left.') : 'Below 75%. You’d need to attend ' + Math.ceil((T * (t + n) - a) / (1 - T) - 1e-9) + ' in a row after.';
+    } else {
+      verdict = n === 0 ? 'Move the slider to plan ahead.' : 'Builds ' + (Math.floor((a + n) / T - (t + n) + 1e-9)) + ' skips of cushion.';
+    }
+    const dates = ['Wed 14 Oct 09:00', 'Wed 14 Oct 11:10 (Lab)', 'Thu 15 Oct 10:00', 'Mon 19 Oct 09:00', 'Wed 21 Oct 09:00', 'Wed 21 Oct 11:10 (Lab)', 'Thu 22 Oct 10:00', 'Mon 26 Oct 09:00'];
+    const whenLine = n === 0 ? 'Next class: ' + dates[0] + ', LH-204.' : 'Covers classes through ' + dates[n - 1] + '.';
+    const s = this.state.secs;
+    const mm = String(Math.floor(s / 60)).padStart(2, '0');
+    const ss = String(s % 60).padStart(2, '0');
+    const presets = [25, 45, 60].map((len) => ({
+      label: len + ' min', on: this.state.len === len, cls: this.state.len === len ? 'chip on' : 'chip',
+      pick: () => { clearInterval(this.timer); this.setState({ len, secs: len * 60, running: false }); }
+    }));
+    return {
+      themeClass: (this.props.theme ?? 'Light') === 'Dark' ? 'dark' : '',
+      isSkip: skip, isAtt: !skip, skipCls: skip ? 'on' : '', attCls: skip ? '' : 'on',
+      setSkip: () => this.setState({ mode: 'skip' }), setAtt: () => this.setState({ mode: 'attend' }),
+      n, onN: (e) => this.setState({ n: Number(e.target.value) }),
+      inc: () => this.setState((st) => ({ n: Math.min(8, st.n + 1) })),
+      dec: () => this.setState((st) => ({ n: Math.max(0, st.n - 1) })),
+      proj: (p * 100).toFixed(1), verdict, whenLine,
+      resBg: ok ? 'var(--oks)' : 'var(--bads)', resFg: ok ? 'var(--ok)' : 'var(--bad)',
+      clock: mm + ':' + ss, presets,
+      runLabel: this.state.running ? 'Pause' : (s < this.state.len * 60 && s > 0 ? 'Resume' : 'Start focus'),
+      toggle: () => this.toggleTimer(),
+      reset: () => { clearInterval(this.timer); this.setState({ secs: this.state.len * 60, running: false }); },
+      slots: [
+        { day: 'Mon', time: '09:00 – 09:55', where: 'LH-204 · Lecture' },
+        { day: 'Wed', time: '09:00 – 09:55', where: 'LH-204 · Lecture' },
+        { day: 'Wed', time: '11:10 – 13:00', where: 'CS Lab 1 · Lab' },
+        { day: 'Thu', time: '10:00 – 10:55', where: 'LH-204 · Lecture' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{"v":3,"createdOnFiles":{"v":1,"at":"2026-10-12T10:00:00Z"},"title":"Attendance Tracker Mockups","launch":{"view":"canvas"},"pages":[],"boards":{
+"Main.dc.html":{"x":0,"y":0,"w":390,"h":1800,"title":"Subjects · overview","is_interactive":true},
+"SubjectTopics.dc.html":{"x":470,"y":0,"w":390,"h":1480,"title":"Subject · Topics","is_interactive":true},
+"SubjectFiles.dc.html":{"x":940,"y":0,"w":390,"h":1180,"title":"Subject · Files","is_interactive":true},
+"SubjectFilesAdd.dc.html":{"x":1410,"y":0,"w":390,"h":844,"title":"Subject · Add file sheet","is_interactive":true},
+"SubjectStudy.dc.html":{"x":1880,"y":0,"w":390,"h":1960,"title":"Subject · Study tools","is_interactive":true},
+"DailyLog.dc.html":{"x":0,"y":2380,"w":390,"h":1340,"title":"Daily Log · day page","is_interactive":true},
+"DailyLogCalendar.dc.html":{"x":470,"y":2380,"w":390,"h":900,"title":"Daily Log · jump to date","is_interactive":true},
+"Timetable.dc.html":{"x":0,"y":4140,"w":390,"h":1300,"title":"Timetable · day view","is_interactive":true},
+"TimetableSlot.dc.html":{"x":470,"y":4140,"w":390,"h":1220,"title":"Timetable · edit class","is_interactive":true},
+"TimetableImport.dc.html":{"x":940,"y":4140,"w":390,"h":1500,"title":"Timetable · AI import guide","is_interactive":true},
+"TimetableImportPaste.dc.html":{"x":1410,"y":4140,"w":390,"h":1500,"title":"Timetable · paste & review","is_interactive":true},
+"Settings.dc.html":{"x":0,"y":6060,"w":390,"h":1800,"title":"Settings","is_interactive":true},
+"Notifications.dc.html":{"x":470,"y":6060,"w":390,"h":1180,"title":"Settings · Notifications","is_interactive":true},
+"History.dc.html":{"x":940,"y":6060,"w":390,"h":1420,"title":"Settings · Attendance history","is_interactive":true},
+"ResetSemester.dc.html":{"x":1410,"y":6060,"w":390,"h":1060,"title":"Settings · Reset semester","is_interactive":true}
+},"order":["Main.dc.html","SubjectTopics.dc.html","SubjectFiles.dc.html","SubjectFilesAdd.dc.html","SubjectStudy.dc.html","DailyLog.dc.html","DailyLogCalendar.dc.html","Timetable.dc.html","TimetableSlot.dc.html","TimetableImport.dc.html","TimetableImportPaste.dc.html","Settings.dc.html","Notifications.dc.html","History.dc.html","ResetSemester.dc.html"],
+"notes":{
+"t1":{"x":0,"y":-260,"text":"1 · Subjects","kind":"title1","maxW":2270},
+"t2":{"x":0,"y":2120,"text":"2 · Daily Log","kind":"title1","maxW":860},
+"t3":{"x":0,"y":3880,"text":"3 · Timetable","kind":"title1","maxW":1800},
+"t4":{"x":0,"y":5800,"text":"4 · Settings","kind":"title1","maxW":1800}
+},"designSystems":[]}

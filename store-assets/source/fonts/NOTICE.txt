@@ -1,0 +1,9 @@
+Roboto-Regular.ttf was extracted unmodified from /system/fonts/Roboto-Regular.ttf
+on the Android capture emulator.
+
+The font's embedded name table states:
+Copyright 2011 Google Inc. All Rights Reserved.
+Licensed under the Apache License, Version 2.0
+http://www.apache.org/licenses/LICENSE-2.0
+
+See Apache-2.0.txt in this directory for the license.

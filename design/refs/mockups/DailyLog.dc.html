@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Daily Log</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+.app{--bg:#F6F7FB;--sf:#FFFFFF;--sr:#ECEEF5;--t1:#171923;--t2:#52586A;--sep:#D9DDE8;--ac:#4144D8;--onac:#FFFFFF;--acs:#EEEEFF;--ok:#176640;--oks:#E8F5ED;--bad:#B42338;--bads:#FDECEF;--warn:#805800;--warns:#FFF4D8;--neu:#535D73;--neus:#EEF0F5;--bar:rgba(255,255,255,.86);position:relative;overflow:hidden;box-sizing:border-box;background:var(--bg);color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+.app.dark{--bg:#101116;--sf:#1B1D26;--sr:#272A36;--t1:#F5F6FC;--t2:#B3B8CB;--sep:#383D4D;--ac:#B2B4FF;--onac:#18194A;--acs:#292B4E;--ok:#7ED6A3;--oks:#173728;--bad:#FF9CA9;--bads:#45222B;--warn:#F1CA72;--warns:#3D321D;--neu:#B6BFD5;--neus:#292F3C;--bar:rgba(27,29,38,.88)}
+.app *{box-sizing:border-box}
+.app button{font:inherit;color:inherit;cursor:pointer}
+.app button:disabled{cursor:default}
+a{color:var(--ac);text-decoration:none}a:hover{color:var(--ac)}
+.card{background:var(--sf);border-radius:16px}
+.cap{font-size:13px;line-height:18px;font-weight:500;color:var(--t2)}
+.ico{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ib{width:44px;height:44px;border-radius:22px;border:0;background:var(--sf);color:var(--ac);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 .5px var(--sep);flex:none}
+.pill{display:inline-flex;align-items:center;gap:4px;min-height:22px;padding:1px 9px;border-radius:11px;font-size:12px;font-weight:700;line-height:18px;white-space:nowrap}
+.btn{height:50px;border-radius:14px;border:0;font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn.pri{background:var(--ac);color:var(--onac)}
+.btn.sec{background:var(--sf);color:var(--t1);box-shadow:inset 0 0 0 1px var(--sep)}
+.btn.hol{background:var(--warns);color:var(--warn);box-shadow:inset 0 0 0 1.5px var(--warn)}
+.btn:disabled{opacity:.45}
+.tri{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:12px}
+.o{height:44px;border-radius:12px;border:1.5px solid var(--sep);background:var(--sf);font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:5px;color:var(--t2) !important}
+.o.p{background:var(--oks);border-color:var(--ok);color:var(--ok) !important}
+.o.a{background:var(--bads);border-color:var(--bad);color:var(--bad) !important}
+.o.n{background:var(--neus);border-color:var(--neu);color:var(--neu) !important}
+.tabbar{position:absolute;left:16px;right:16px;bottom:24px;height:64px;border-radius:32px;background:var(--bar);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 8px 28px rgba(20,22,40,.14),0 0 0 .5px var(--sep);display:flex;padding:6px;z-index:5}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:26px;font-size:11px;font-weight:600;color:var(--t2) !important}
+.tab.on{background:var(--acs);color:var(--ac) !important}
+</style>
+</helmet>
+<div class="app {{themeClass}}" style="width: 390px; height: 1340px">
+  <header style="padding: 62px 20px 12px; display: flex; align-items: flex-end; justify-content: space-between">
+    <div>
+      <div class="cap">Fall 2026 · Week 12</div>
+      <h1 style="margin: 2px 0 0; font-size: 34px; line-height: 41px; font-weight: 700; letter-spacing: -0.4px">Daily Log</h1>
+    </div>
+    <a href="DailyLogCalendar.dc.html" class="ib" aria-label="Jump to a date"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="2.5"></rect><path d="M3 9.5h18M8 2.5v4M16 2.5v4"></path><path d="M7.5 13.5h.01M12 13.5h.01M16.5 13.5h.01M7.5 17h.01M12 17h.01"></path></svg></a>
+  </header>
+
+  <main style="padding: 4px 16px 120px; display: flex; flex-direction: column; gap: 14px">
+    <section class="card" aria-label="Selected day" style="padding: 10px; display: flex; align-items: center; gap: 8px; border-radius: 20px">
+      <button class="ib" aria-label="Previous class day" onClick="{{prev}}" disabled="{{noPrev}}" style="background: var(--sr); box-shadow: none; opacity: {{prevOp}}"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button>
+      <div aria-live="polite" style="flex: 1; text-align: center">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 8px">
+          <span style="font-size: 20px; line-height: 25px; font-weight: 700">{{day.weekday}}</span>
+          <sc-if value="{{day.badge}}" hint-placeholder-val="{{true}}"><span class="pill" style="background: var(--acs); color: var(--ac)">{{day.badge}}</span></sc-if>
+        </div>
+        <div class="cap">{{day.date}}</div>
+      </div>
+      <button class="ib" aria-label="Next class day" onClick="{{next}}" disabled="{{noNext}}" style="background: var(--sr); box-shadow: none; opacity: {{nextOp}}"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button>
+    </section>
+
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 4px">
+      <div style="flex: 1; height: 6px; border-radius: 3px; background: var(--sr); overflow: hidden"><div style="height: 6px; background: var(--ac); width: {{progW}}"></div></div>
+      <span class="cap" style="white-space: nowrap">{{summary}}</span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+      <button class="btn pri" onClick="{{allPresent}}" disabled="{{holiday}}">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 20px; height: 20px"><path d="M2 12.5l4.5 4.5L15 8.5M10 16l1 1 9.5-9.5"></path></svg>Mark all present
+      </button>
+      <button class="{{holCls}}" aria-pressed="{{holiday}}" onClick="{{toggleHoliday}}">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 20px; height: 20px"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>{{holLabel}}
+      </button>
+    </div>
+
+    <sc-if value="{{holiday}}" hint-placeholder-val="{{false}}">
+      <div role="status" style="display: flex; gap: 12px; align-items: center; padding: 14px 16px; border-radius: 16px; background: var(--warns); color: var(--warn)">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+        <div style="flex: 1; font-size: 15px; line-height: 20px; font-weight: 600">Holiday. None of these classes count toward attendance.</div>
+        <button onClick="{{toggleHoliday}}" style="border: 0; background: none; font-weight: 700; height: 44px; color: var(--warn)">Undo</button>
+      </div>
+    </sc-if>
+
+    <sc-for list="{{classes}}" as="c" hint-placeholder-count="5">
+      <article class="card" aria-label="{{c.name}}, {{c.start}}" style="padding: 14px 14px 12px; opacity: {{c.op}}">
+        <div style="display: flex; gap: 12px; align-items: flex-start">
+          <div style="width: 48px; flex: none">
+            <div style="font-size: 15px; line-height: 20px; font-weight: 700">{{c.start}}</div>
+            <div class="cap">{{c.end}}</div>
+          </div>
+          <div style="flex: 1; min-width: 0">
+            <div style="font-size: 16px; line-height: 21px; font-weight: 600">{{c.name}}</div>
+            <div class="cap" style="display: flex; align-items: center; gap: 4px; margin-top: 2px">
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 14px; height: 14px"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>
+              {{c.venue}} · {{c.type}}
+            </div>
+          </div>
+          <div style="text-align: right; flex: none">
+            <div style="font-size: 17px; line-height: 22px; font-weight: 700; color: {{c.pctColor}}">{{c.pct}}%</div>
+            <div class="cap" style="color: {{c.deltaColor}}">{{c.delta}}</div>
+          </div>
+        </div>
+        <div class="tri" role="radiogroup" aria-label="Attendance for {{c.name}}">
+          <button class="{{c.pCls}}" role="radio" aria-checked="{{c.isP}}" onClick="{{c.setP}}" disabled="{{holiday}}"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px; stroke-width: 2.4"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Present</button>
+          <button class="{{c.aCls}}" role="radio" aria-checked="{{c.isA}}" onClick="{{c.setA}}" disabled="{{holiday}}"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px; stroke-width: 2.4"><path d="M6 6l12 12M18 6L6 18"></path></svg>Absent</button>
+          <button class="{{c.nCls}}" role="radio" aria-checked="{{c.isN}}" onClick="{{c.setN}}" disabled="{{holiday}}"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px; stroke-width: 2.2"><circle cx="12" cy="12" r="8.5"></circle><path d="M8 12h8"></path></svg>Neutral</button>
+        </div>
+      </article>
+    </sc-for>
+
+    <div class="cap" style="padding: 0 4px">Neutral is for cancelled classes, free periods or anything you don’t want counted.</div>
+
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+      <button class="btn" style="background: transparent; color: var(--ac); border: 1.5px dashed var(--sep)"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 20px; height: 20px"><path d="M12 5v14M5 12h14"></path></svg>Extra class</button>
+      <button class="btn sec"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 20px; height: 20px"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"></path></svg>Day note</button>
+    </div>
+  </main>
+
+  <nav class="tabbar" aria-label="Tabs">
+    <a class="tab" href="Main.dc.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h14v14H6a2 2 0 0 0-2 2zm0 0a2 2 0 0 0 2 2h14"></path></svg>Subjects</a>
+    <a class="tab on" href="DailyLog.dc.html" aria-current="page"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="2.5"></rect><path d="M3 9.5h18M8 2.5v4M16 2.5v4M9 15l2 2 4-4"></path></svg>Daily Log</a>
+    <a class="tab" href="Timetable.dc.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2.5"></rect><path d="M3 9h18M9 3v18"></path></svg>Timetable</a>
+    <a class="tab" href="Settings.dc.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path></svg>Settings</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["Light","Dark"],"default":"Light"},"$preview":{"width":390,"height":1340}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = {
+      idx: 2,
+      holiday: { 0: false, 1: false, 2: false, 3: false },
+      marks: {
+        0: ['a', 'a', 'a'],
+        1: ['p', 'p', 'p', 'p'],
+        2: ['p', 'p', null, null, null],
+        3: [null, null, null, null]
+      }
+    };
+  }
+  setMark(i, v) {
+    const d = this.state.idx;
+    this.setState((st) => {
+      const cur = st.marks[d].slice();
+      cur[i] = cur[i] === v ? null : v;
+      return { marks: { ...st.marks, [d]: cur } };
+    });
+  }
+  renderVals() {
+    const base = { DSA: [18, 22], OS: [14, 20], DM: [21, 24], DL: [9, 12], EC: [11, 16], TW: [8, 9] };
+    const names = { DSA: 'Data Structures & Algorithms', OS: 'Operating Systems', DM: 'Discrete Mathematics', DL: 'Digital Logic Lab', EC: 'Economics for Engineers', TW: 'Technical Writing' };
+    const k = (s, start, end, venue, type) => ({ s, start, end, venue, type });
+    const days = [
+      { weekday: 'Thursday', date: '8 October 2026', badge: '', list: [k('OS', '09:00', '09:55', 'LH-204', 'Lecture'), k('DSA', '10:00', '10:55', 'LH-204', 'Lecture'), k('DL', '14:00', '16:45', 'ECE Lab 2', 'Lab')] },
+      { weekday: 'Friday', date: '9 October 2026', badge: '', list: [k('DM', '09:00', '09:55', 'T-12', 'Tutorial'), k('OS', '10:00', '10:55', 'T-08', 'Tutorial'), k('TW', '11:10', '12:05', 'Seminar Rm 3', 'Lecture'), k('EC', '14:00', '14:55', 'LH-108', 'Lecture')] },
+      { weekday: 'Monday', date: '12 October 2026', badge: 'Today', list: [k('DSA', '09:00', '09:55', 'LH-204', 'Lecture'), k('OS', '10:00', '10:55', 'LH-204', 'Lecture'), k('DM', '11:10', '12:05', 'T-12', 'Tutorial'), k('DL', '14:00', '16:45', 'ECE Lab 2', 'Lab'), k('EC', '16:50', '17:45', 'LH-108', 'Lecture')] },
+      { weekday: 'Tuesday', date: '13 October 2026', badge: 'Tomorrow', list: [k('OS', '09:00', '09:55', 'LH-204', 'Lecture'), k('DM', '10:00', '10:55', 'LH-201', 'Lecture'), k('EC', '11:10', '12:05', 'LH-108', 'Lecture'), k('TW', '14:00', '14:55', 'Seminar Rm 3', 'Lecture')] }
+    ];
+    const d = this.state.idx;
+    const day = days[d];
+    const holiday = !!this.state.holiday[d];
+    const marks = this.state.marks[d];
+    const tone = (p) => (p >= 0.77 ? 'var(--ok)' : p >= 0.75 ? 'var(--warn)' : 'var(--bad)');
+    const classes = day.list.map((c, i) => {
+      const [a, t] = base[c.s];
+      const m = holiday ? null : marks[i];
+      const before = a / t;
+      const after = m === 'p' ? (a + 1) / (t + 1) : m === 'a' ? a / (t + 1) : before;
+      const diff = (after - before) * 100;
+      return {
+        name: names[c.s], start: c.start, end: c.end, venue: c.venue, type: c.type,
+        pct: (after * 100).toFixed(1), pctColor: tone(after),
+        delta: m === 'p' || m === 'a' ? (diff >= 0 ? '▲ ' : '▼ ') + Math.abs(diff).toFixed(1) : m === 'n' ? 'Not counted' : holiday ? 'Holiday' : 'Not marked',
+        deltaColor: m === 'p' ? 'var(--ok)' : m === 'a' ? 'var(--bad)' : 'var(--t2)',
+        op: holiday ? '0.5' : '1',
+        isP: m === 'p', isA: m === 'a', isN: m === 'n',
+        pCls: m === 'p' ? 'o p' : 'o', aCls: m === 'a' ? 'o a' : 'o', nCls: m === 'n' ? 'o n' : 'o',
+        setP: () => this.setMark(i, 'p'), setA: () => this.setMark(i, 'a'), setN: () => this.setMark(i, 'n')
+      };
+    });
+    const marked = holiday ? 0 : marks.filter(Boolean).length;
+    const pc = holiday ? 0 : marks.filter((x) => x === 'p').length;
+    const ac = holiday ? 0 : marks.filter((x) => x === 'a').length;
+    return {
+      themeClass: (this.props.theme ?? 'Light') === 'Dark' ? 'dark' : '',
+      day, classes, holiday,
+      summary: holiday ? 'Holiday · nothing counted' : marked + ' of ' + marks.length + ' marked · ' + pc + ' present · ' + ac + ' absent',
+      progW: holiday ? '100%' : Math.round((marked / marks.length) * 100) + '%',
+      noPrev: d === 0, noNext: d === days.length - 1,
+      prevOp: d === 0 ? '0.4' : '1', nextOp: d === days.length - 1 ? '0.4' : '1',
+      prev: () => this.setState((st) => ({ idx: Math.max(0, st.idx - 1) })),
+      next: () => this.setState((st) => ({ idx: Math.min(days.length - 1, st.idx + 1) })),
+      allPresent: () => this.setState((st) => ({ marks: { ...st.marks, [d]: st.marks[d].map(() => 'p') } })),
+      toggleHoliday: () => this.setState((st) => ({ holiday: { ...st.holiday, [d]: !st.holiday[d] } })),
+      holCls: holiday ? 'btn hol' : 'btn sec',
+      holLabel: holiday ? 'Holiday' : 'Mark holiday'
+    };
+  }
+}
+</script>
+</body>
+</html>

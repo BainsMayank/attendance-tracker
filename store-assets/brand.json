@@ -1,0 +1,150 @@
+{
+  "name": "BunkBuddy",
+  "tagline": "Know your safe skips.",
+  "sources": [
+    "src/ui/tokens.ts",
+    "src/features/settings/model.ts",
+    "src/ui/text.tsx",
+    "docs/DESIGN.md",
+    "design/refs/README.md",
+    "app.json"
+  ],
+  "decision": "Current implemented light tokens and the superseding calm redesign take precedence over older design mockups. Default persisted accent indigo is displayed as Ink.",
+  "colors": {
+    "background": "#F5F5F2",
+    "surface": "#FFFFFF",
+    "surfaceRaised": "#EFEFEB",
+    "textPrimary": "#1C1C1A",
+    "textSecondary": "#5E5E59",
+    "textMuted": "#6B6B66",
+    "separator": "#E3E3DE",
+    "controlBorder": "#8A8A84",
+    "accent": "#2F5276",
+    "onAccent": "#FFFFFF",
+    "accentSubtle": "#EAEFF4",
+    "present": "#2E6B4F",
+    "presentSubtle": "#EAF2EC",
+    "absent": "#A63D35",
+    "absentSubtle": "#F7ECEA",
+    "warning": "#8A5A12",
+    "warningSubtle": "#F6EFE2",
+    "neutral": "#5F6168",
+    "neutralSubtle": "#EFEFEC",
+    "scrim": "rgba(20,20,18,0.32)"
+  },
+  "darkColors": {
+    "background": "#111111",
+    "surface": "#1B1B1A",
+    "surfaceRaised": "#262624",
+    "textPrimary": "#EDEDEA",
+    "textSecondary": "#A6A6A0",
+    "textMuted": "#8D8D88",
+    "separator": "#30302E",
+    "controlBorder": "#7C7C77",
+    "accent": "#9DB6D3",
+    "onAccent": "#152435",
+    "accentSubtle": "#1F2833",
+    "present": "#8CC7A6",
+    "presentSubtle": "#1B2A22",
+    "absent": "#E79A90",
+    "absentSubtle": "#2E1F1D",
+    "warning": "#D9B26E",
+    "warningSubtle": "#2C2519",
+    "neutral": "#B4B6BC",
+    "neutralSubtle": "#252525",
+    "scrim": "rgba(0,0,0,0.56)"
+  },
+  "graphicMint": "#8CC7A6",
+  "mintSource": "The real dark-theme present token; use light-theme present for dark text and status marks.",
+  "radii": {
+    "small": 6,
+    "input": 8,
+    "card": 12,
+    "summary": 14,
+    "pill": 999
+  },
+  "spacing": {
+    "xs": 4,
+    "sm": 8,
+    "md": 12,
+    "row": 16,
+    "gutter": 20,
+    "lg": 24,
+    "xl": 32,
+    "xxl": 40,
+    "hero": 48
+  },
+  "typography": {
+    "statistic": {
+      "fontSize": 48,
+      "lineHeight": 56,
+      "fontWeight": "600"
+    },
+    "heading": {
+      "fontSize": 22,
+      "lineHeight": 28,
+      "fontWeight": "600"
+    },
+    "title": {
+      "fontSize": 17,
+      "lineHeight": 24,
+      "fontWeight": "600"
+    },
+    "body": {
+      "fontSize": 17,
+      "lineHeight": 24,
+      "fontWeight": "400"
+    },
+    "secondary": {
+      "fontSize": 15,
+      "lineHeight": 21,
+      "fontWeight": "400"
+    },
+    "caption": {
+      "fontSize": 13,
+      "lineHeight": 18,
+      "fontWeight": "500"
+    }
+  },
+  "fonts": {
+    "app": "Native platform system sans-serif; no bundled custom font or fontFamily override",
+    "android": "Roboto",
+    "graphics": "Roboto, extracted from the capture emulator; bundled under source/fonts with Apache License 2.0 as identified in the font metadata",
+    "weights": [
+      400,
+      500,
+      600,
+      700
+    ],
+    "numerals": "tabular"
+  },
+  "adaptiveBackground": "#2F5276",
+  "adaptiveSafeZone": {
+    "canvas": 1024,
+    "maximumCentralFraction": 0.66,
+    "symbolBounds": [
+      256,
+      256,
+      768,
+      768
+    ],
+    "note": "Symbol fits within the central 50% square and within the Android circular safe zone."
+  },
+  "screenshotComposition": {
+    "width": 1080,
+    "height": 1920,
+    "screenshotWidth": 842,
+    "screenshotHeight": 1497,
+    "top": 350,
+    "headlineBand": 300,
+    "border": 2,
+    "screenshotTreatment": "Uniform resize only; no UI redraw, pixel editing, crop, or rounded clipping"
+  },
+  "featureGraphic": {
+    "width": 1024,
+    "height": 500,
+    "safeMarginFraction": 0.08,
+    "ringValue": 82,
+    "ringNote": "Illustrative brand graphic, not a screenshot or a claim about the fictional demo totals"
+  }
+}

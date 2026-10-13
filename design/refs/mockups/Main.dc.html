@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Subjects</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+.app{--bg:#F6F7FB;--sf:#FFFFFF;--sr:#ECEEF5;--t1:#171923;--t2:#52586A;--sep:#D9DDE8;--ac:#4144D8;--onac:#FFFFFF;--acs:#EEEEFF;--ok:#176640;--oks:#E8F5ED;--bad:#B42338;--bads:#FDECEF;--warn:#805800;--warns:#FFF4D8;--neu:#535D73;--neus:#EEF0F5;--bar:rgba(255,255,255,.86);position:relative;overflow:hidden;box-sizing:border-box;background:var(--bg);color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+.app.dark{--bg:#101116;--sf:#1B1D26;--sr:#272A36;--t1:#F5F6FC;--t2:#B3B8CB;--sep:#383D4D;--ac:#B2B4FF;--onac:#18194A;--acs:#292B4E;--ok:#7ED6A3;--oks:#173728;--bad:#FF9CA9;--bads:#45222B;--warn:#F1CA72;--warns:#3D321D;--neu:#B6BFD5;--neus:#292F3C;--bar:rgba(27,29,38,.88)}
+.app *{box-sizing:border-box}
+.app button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--ac);text-decoration:none}a:hover{color:var(--ac)}
+.card{background:var(--sf);border-radius:16px}
+.cap{font-size:13px;line-height:18px;font-weight:500;color:var(--t2)}
+.ico{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ib{width:44px;height:44px;border-radius:22px;border:0;background:var(--sf);color:var(--ac);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 .5px var(--sep)}
+.pill{align-self:flex-start;display:inline-flex;align-items:center;gap:4px;min-height:24px;padding:2px 10px;border-radius:12px;font-size:13px;font-weight:600;line-height:18px}
+.pill.ok{background:var(--oks);color:var(--ok)}.pill.bad{background:var(--bads);color:var(--bad)}.pill.warn{background:var(--warns);color:var(--warn)}
+.chip{height:36px;padding:0 14px;border-radius:18px;border:1px solid var(--sep);background:var(--sf);font-size:14px;font-weight:600;white-space:nowrap}
+.chip.on{background:var(--t1);color:var(--bg) !important;border-color:var(--t1)}
+.stat{display:flex;flex-direction:column;align-items:center;gap:1px}
+.stat b{font-size:17px;line-height:22px;font-weight:600}
+.stat span{font-size:12px;line-height:16px;color:var(--t2);font-weight:500}
+.step{display:flex;align-items:center;justify-content:space-between;height:48px;border-radius:24px;padding:0 4px;font-size:15px;font-weight:600}
+.step.ok{background:var(--oks);color:var(--ok)}.step.bad{background:var(--bads);color:var(--bad)}
+.sb{width:40px;height:40px;border-radius:20px;border:0;background:var(--sf);display:flex;align-items:center;justify-content:center}
+.tabbar{position:absolute;left:16px;right:16px;bottom:24px;height:64px;border-radius:32px;background:var(--bar);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 8px 28px rgba(20,22,40,.14),0 0 0 .5px var(--sep);display:flex;padding:6px;z-index:5}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:26px;font-size:11px;font-weight:600;color:var(--t2) !important}
+.tab.on{background:var(--acs);color:var(--ac) !important}
+</style>
+</helmet>
+<div class="app {{themeClass}}" style="width: 390px; height: 1800px">
+  <header style="padding: 62px 20px 12px; display: flex; align-items: flex-end; justify-content: space-between">
+    <div>
+      <div class="cap">Fall 2026 · Week 12</div>
+      <h1 style="margin: 2px 0 0; font-size: 34px; line-height: 41px; font-weight: 700; letter-spacing: -0.4px">Subjects</h1>
+    </div>
+    <button class="ib" aria-label="Add subject"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+  </header>
+
+  <main style="padding: 8px 16px 120px; display: flex; flex-direction: column; gap: 16px">
+    <section class="card" aria-label="Overall attendance" style="border-radius: 24px; padding: 20px; display: flex; flex-direction: column; gap: 16px">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start">
+        <div>
+          <div class="cap">Overall attendance</div>
+          <div style="font-size: 48px; line-height: 56px; font-weight: 600; letter-spacing: -1px">{{ov.pct}}<span style="font-size: 24px; letter-spacing: 0">%</span></div>
+        </div>
+        <span class="pill {{ov.tone}}" style="margin-top: 4px">Target {{T}}%</span>
+      </div>
+      <div style="position: relative; height: 8px; border-radius: 4px; background: var(--sr)">
+        <div style="height: 8px; border-radius: 4px; width: {{ov.w}}; background: {{ov.color}}"></div>
+        <div style="position: absolute; top: -4px; left: {{ov.tl}}; width: 2px; height: 16px; border-radius: 1px; background: var(--t1)"></div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+        <div class="stat"><b>{{ov.a}}</b><span>Attended</span></div>
+        <div class="stat"><b>{{ov.m}}</b><span>Missed</span></div>
+        <div class="stat"><b>{{ov.t}}</b><span>Total</span></div>
+      </div>
+      <a href="DailyLog.dc.html" style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: var(--acs); color: var(--ac); min-height: 48px">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="2.5"></rect><path d="M3 9.5h18M8 2.5v4M16 2.5v4M9 15l2 2 4-4"></path></svg>
+        <span style="flex: 1; font-size: 15px; font-weight: 600; color: var(--t1)">Today · 5 classes, 2 logged</span>
+        <span style="font-size: 15px; font-weight: 600">Log today</span>
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px"><path d="M9 5l7 7-7 7"></path></svg>
+      </a>
+    </section>
+
+    <div role="group" aria-label="Filter subjects" style="display: flex; gap: 8px">
+      <sc-for list="{{chips}}" as="c" hint-placeholder-count="4">
+        <button class="{{c.cls}}" aria-pressed="{{c.on}}" onClick="{{c.pick}}">{{c.label}} <span style="opacity: 0.65; margin-left: 2px">{{c.n}}</span></button>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{empty}}" hint-placeholder-val="{{false}}">
+      <div class="card" style="padding: 32px 20px; text-align: center; font-size: 15px; color: var(--t2)">No subjects in this group right now.</div>
+    </sc-if>
+
+    <sc-for list="{{subs}}" as="s" hint-placeholder-count="6">
+      <article class="card" style="padding: 16px; display: flex; flex-direction: column; gap: 14px">
+        <a href="SubjectTopics.dc.html" style="display: flex; align-items: center; gap: 14px; color: var(--t1)">
+          <div style="position: relative; width: 60px; height: 60px; flex: none">
+            <svg width="60" height="60" viewBox="0 0 60 60" aria-hidden="true">
+              <circle cx="30" cy="30" r="26" fill="none" stroke-width="6" style="stroke: var(--sr)"></circle>
+              <circle cx="30" cy="30" r="26" fill="none" stroke-width="6" stroke-linecap="round" stroke-dasharray="{{s.dash}}" transform="rotate(-90 30 30)" style="stroke: {{s.color}}"></circle>
+              <line x1="{{tick.x1}}" y1="{{tick.y1}}" x2="{{tick.x2}}" y2="{{tick.y2}}" stroke-width="2" stroke-linecap="round" style="stroke: var(--t1)"></line>
+            </svg>
+            <span style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700">{{s.pctShort}}</span>
+          </div>
+          <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+            <div style="font-size: 17px; line-height: 22px; font-weight: 600">{{s.name}}</div>
+            <div class="cap">{{s.code}} · {{s.next}}</div>
+            <span class="pill {{s.tone}}">{{s.status}}</span>
+          </div>
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px; color: var(--t2)"><path d="M9 5l7 7-7 7"></path></svg>
+        </a>
+        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; background: var(--bg); border-radius: 12px; padding: 10px 4px">
+          <div class="stat"><b>{{s.a}}</b><span>Attended</span></div>
+          <div class="stat"><b>{{s.m}}</b><span>Missed</span></div>
+          <div class="stat"><b>{{s.t}}</b><span>Total</span></div>
+          <div class="stat"><b style="color: {{s.color}}">{{s.need}}</b><span>{{s.needLabel}}</span></div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+          <div class="step ok">
+            <button class="sb" aria-label="Remove one attended class" onClick="{{s.decA}}"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px"><path d="M5 12h14"></path></svg></button>
+            <span>Attended</span>
+            <button class="sb" aria-label="Add one attended class" onClick="{{s.incA}}"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px"><path d="M12 5v14M5 12h14"></path></svg></button>
+          </div>
+          <div class="step bad">
+            <button class="sb" aria-label="Remove one missed class" onClick="{{s.decM}}"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px"><path d="M5 12h14"></path></svg></button>
+            <span>Missed</span>
+            <button class="sb" aria-label="Add one missed class" onClick="{{s.incM}}"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px"><path d="M12 5v14M5 12h14"></path></svg></button>
+          </div>
+        </div>
+      </article>
+    </sc-for>
+  </main>
+
+  <nav class="tabbar" aria-label="Tabs">
+    <a class="tab on" href="Main.dc.html" aria-current="page"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h14v14H6a2 2 0 0 0-2 2zm0 0a2 2 0 0 0 2 2h14"></path></svg>Subjects</a>
+    <a class="tab" href="DailyLog.dc.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="2.5"></rect><path d="M3 9.5h18M8 2.5v4M16 2.5v4M9 15l2 2 4-4"></path></svg>Daily Log</a>
+    <a class="tab" href="Timetable.dc.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2.5"></rect><path d="M3 9h18M9 3v18"></path></svg>Timetable</a>
+    <a class="tab" href="Settings.dc.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path></svg>Settings</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["Light","Dark"],"default":"Light"},"target":{"editor":"range","min":50,"max":90,"step":5,"unit":"%","default":75},"$preview":{"width":390,"height":1800}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = {
+      filter: 'all',
+      subs: [
+        { id: 1, name: 'Data Structures & Algorithms', code: 'CS201', next: 'Today 09:00, LH-204', a: 18, m: 4 },
+        { id: 2, name: 'Operating Systems', code: 'CS204', next: 'Today 10:00, LH-204', a: 14, m: 6 },
+        { id: 3, name: 'Discrete Mathematics', code: 'MA203', next: 'Today 11:10, T-12', a: 21, m: 3 },
+        { id: 4, name: 'Digital Logic Lab', code: 'EC211', next: 'Today 14:00, ECE Lab 2', a: 9, m: 3 },
+        { id: 5, name: 'Economics for Engineers', code: 'HS201', next: 'Today 16:50, LH-108', a: 11, m: 5 },
+        { id: 6, name: 'Technical Writing', code: 'HS105', next: 'Tue 14:00, Seminar Rm 3', a: 8, m: 1 }
+      ]
+    };
+  }
+  bump(id, da, dm) {
+    this.setState((st) => ({
+      subs: st.subs.map((s) => (s.id !== id ? s : { ...s, a: Math.max(0, s.a + da), m: Math.max(0, s.m + dm) }))
+    }));
+  }
+  renderVals() {
+    const T = Math.min(95, Math.max(50, Number(this.props.target ?? 75)));
+    const tg = T / 100;
+    const C = 2 * Math.PI * 26;
+    const ang = tg * 2 * Math.PI - Math.PI / 2;
+    const tick = {
+      x1: (30 + 20 * Math.cos(ang)).toFixed(1), y1: (30 + 20 * Math.sin(ang)).toFixed(1),
+      x2: (30 + 32 * Math.cos(ang)).toFixed(1), y2: (30 + 32 * Math.sin(ang)).toFixed(1)
+    };
+    const colors = { ok: 'var(--ok)', warn: 'var(--warn)', bad: 'var(--bad)' };
+    const all = this.state.subs.map((s) => {
+      const t = s.a + s.m;
+      const p = t ? s.a / t : 1;
+      let tone, status, need, needLabel;
+      if (p >= tg) {
+        const skip = Math.max(0, Math.floor(s.a / tg - t + 1e-9));
+        need = skip; needLabel = 'Can skip';
+        tone = skip >= 1 ? 'ok' : 'warn';
+        status = skip >= 1 ? 'Safe · can skip ' + skip : 'On the line · don’t skip';
+      } else {
+        need = Math.ceil((tg * t - s.a) / (1 - tg) - 1e-9); needLabel = 'To attend';
+        tone = 'bad';
+        status = 'Attend next ' + need + ' to reach ' + T + '%';
+      }
+      return {
+        ...s, t, tone, status, need, needLabel, color: colors[tone],
+        pctShort: Math.round(p * 100) + '%',
+        dash: (p * C).toFixed(2) + ' ' + C.toFixed(2),
+        incA: () => this.bump(s.id, 1, 0), decA: () => this.bump(s.id, -1, 0),
+        incM: () => this.bump(s.id, 0, 1), decM: () => this.bump(s.id, 0, -1)
+      };
+    });
+    const a = all.reduce((x, s) => x + s.a, 0);
+    const m = all.reduce((x, s) => x + s.m, 0);
+    const t = a + m;
+    const p = t ? a / t : 1;
+    const otone = p < tg ? 'bad' : p < tg + 0.02 ? 'warn' : 'ok';
+    const ov = { a, m, t, pct: (p * 100).toFixed(1), tone: otone, color: colors[otone], w: (p * 100).toFixed(1) + '%', tl: 'calc(' + T + '% - 1px)' };
+    const f = this.state.filter;
+    const defs = [['all', 'All'], ['bad', 'At risk'], ['warn', 'On the line'], ['ok', 'Safe']];
+    const chips = defs.map(([k, label]) => ({
+      label, on: f === k, cls: f === k ? 'chip on' : 'chip',
+      n: k === 'all' ? all.length : all.filter((s) => s.tone === k).length,
+      pick: () => this.setState({ filter: k })
+    }));
+    const subs = f === 'all' ? all : all.filter((s) => s.tone === f);
+    return {
+      themeClass: (this.props.theme ?? 'Light') === 'Dark' ? 'dark' : '',
+      T, tick, ov, chips, subs, empty: subs.length === 0
+    };
+  }
+}
+</script>
+</body>
+</html>
